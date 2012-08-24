@@ -1,2 +1,27 @@
-<h1>Projects#new</h1>
-<p>Find me in app/views/projects/new.html.erb</p>
+<h1>Create new project</h1>
+
+<% if @project.errors.any? %>
+<div class="alert alert-error">
+  <p>User could not be saved, the following errors occurred:</p>
+  <% @project.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+</div>
+<% end %>
+
+<%= form_for :project, :url => user_projects_path(@current_user) do |form| %>
+
+  <div class="input-prepend">
+    <%= form.text_field :name, :placeholder => 'Name', :class => 'span4' %>
+  </div>
+
+  <div class="input-prepend">
+    <%= form.text_area :description, :placeholder => 'Description',
+          :rows => 4,
+          :class => 'span4' %>
+  </div>
+
+  <%= submit_tag "Submit", :class => 'btn' %>
+
+<% end %>
+
