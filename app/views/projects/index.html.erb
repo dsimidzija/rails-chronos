@@ -4,7 +4,13 @@
   <tbody>
     <% for project in @projects %>
     <tr>
-      <td><%= project.name %></td>
+      <td><%= h project.name %></td>
+      <td><%= link_to 'Edit', edit_user_project_path(@current_user, project) %></td>
+      <td>
+        <%= link_to 'Delete', user_project_path(@current_user, project),
+          :confirm => 'Are you sure?',
+          :method => :delete %>
+      </td>
     </tr>
     <% end %>
   </tbody>

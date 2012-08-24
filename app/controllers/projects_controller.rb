@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :find_project, :only => [:edit, :update, :show, :destroy]
+
   def new
     @project = Project.new
   end
@@ -20,6 +22,13 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    if @project.update_attributes(params[:project])
+      flash[:success] = 'Project updated'
+      redirect_to user_projects_path(@current_user)
+    else
+      flash.now[:notice] = 'Could not save the project'
+      render :action => 'edit'
+    end
   end
 
   def index
@@ -30,6 +39,16 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    @project.destroy
+
+    flash[:success] = 'Project deleted'
+    redirect_to user_projects_path(@current_user)
+  end
+
+  protected
+
+  def find_project
+    @project = Project.find(params[:id])
   end
 
 end
