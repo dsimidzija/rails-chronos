@@ -1,5 +1,13 @@
 Chronos::Application.routes.draw do
+
+  match 'login' => 'sessions#new', :as => :new_session
+  match 'logout' => 'sessions#destroy', :as => :destroy_session
+
+  post 'sessions/create'
+
   resources :users
+
+  root :to => 'sessions#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

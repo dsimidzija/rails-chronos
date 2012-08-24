@@ -2,10 +2,14 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.0.4'
 
+gem 'rake', '0.8.7'
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+
+gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'

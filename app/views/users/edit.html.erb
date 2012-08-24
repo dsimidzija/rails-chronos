@@ -1,2 +1,29 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>Update profile</h1>
+
+<% if @user.errors.any? %>
+<div class="alert alert-error">
+  <p>User could not be saved, the following errors occurred:</p>
+  <% @user.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+</div>
+<% end %>
+
+<%= form_for :user, :url => user_path(@user), :html => { :method => 'put' } do |form| %>
+
+  <div class="input-prepend">
+    <span class="add-on">A</span><%= form.text_field :name, :placeholder => 'Name' %>
+  </div>
+
+  <div class="input-prepend">
+    <span class="add-on">*</span><%= form.password_field :password, :placeholder => 'Password' %>
+  </div>
+
+  <div class="input-prepend">
+    <span class="add-on">**</span><%= form.password_field :password_confirmation, :placeholder => 'Password confirmation' %>
+  </div>
+
+  <%= submit_tag "Submit", :class => 'btn' %>
+
+<% end %>
+

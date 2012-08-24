@@ -1,29 +1,34 @@
 <h1>Chronos registration</h1>
 
 <% if @user.errors.any? %>
-  <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+<div class="alert alert-error">
+  <p>User could not be saved, the following errors occurred:</p>
+  <% @user.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+</div>
 <% end %>
 
 <%= form_for :user, :url => users_path do |form| %>
 
   <div class="input-prepend">
-    <span class="add-on">A</span><%= form.text_field :name, :placeholder => 'Name' %>
+    <span class="add-on">A</span>
+    <%= form.text_field :name, :placeholder => 'Name', :class => 'span4' %>
   </div>
 
   <div class="input-prepend">
-    <span class="add-on">@</span><%= form.text_field :email, :placeholder => 'E-mail' %>
+    <span class="add-on">@</span>
+    <%= form.text_field :email, :placeholder => 'E-mail', :class => 'span4' %>
   </div>
 
   <div class="input-prepend">
-    <span class="add-on">*</span><%= form.password_field :password, :placeholder => 'Password' %>
+    <span class="add-on">*</span>
+    <%= form.password_field :password, :placeholder => 'Password', :class => 'span4' %>
   </div>
 
   <div class="input-prepend">
-    <span class="add-on">**</span><%= form.password_field :password_confirmation, :placeholder => 'Password confirmation' %>
+    <span class="add-on">**</span>
+    <%= form.password_field :password_confirmation, :placeholder => 'Password confirmation', :class => 'span4' %>
   </div>
 
   <%= submit_tag "Submit", :class => 'btn' %>

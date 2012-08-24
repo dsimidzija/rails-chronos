@@ -1,0 +1,21 @@
+<h1>Login</h1>
+
+<%= form_tag :controller => 'sessions', :action => 'create' do %>
+
+  <div class="input-prepend">
+    <span class="add-on">@</span>
+    <%= text_field_tag :email, params[:email],
+          :placeholder => 'E-mail',
+          :class => 'span4' %>
+  </div>
+
+  <div class="input-prepend">
+    <span class="add-on">*</span>
+    <%= password_field_tag :password, params[:password],
+          :placeholder => 'Password',
+          :class => 'span4' %>
+  </div>
+
+  <%= submit_tag "Login", :class => 'btn' %>
+
+<% end %>
