@@ -1,0 +1,8 @@
+<% unless model.nil? or model.errors.empty? %>
+<div class="alert alert-error">
+  <p><%= model.class.model_name.human %> could not be saved, the following errors occurred:</p>
+  <% model.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+</div>
+<% end %>

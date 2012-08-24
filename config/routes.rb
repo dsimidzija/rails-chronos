@@ -7,6 +7,7 @@ Chronos::Application.routes.draw do
 
   resources :users do
     resources :projects
+    resources :time_entries
   end
 
   root :to => 'sessions#new'

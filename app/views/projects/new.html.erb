@@ -1,19 +1,14 @@
 <h1>Create new project</h1>
 
-<% if @project.errors.any? %>
-<div class="alert alert-error">
-  <p>Project could not be saved, the following errors occurred:</p>
-  <% @project.errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>
-</div>
-<% end %>
+<%= render :partial => 'partials/form_errors', :locals => { :model => @project } %>
 
 <%= form_for :project, :url => user_projects_path(@current_user) do |form| %>
 
   <%= render :partial => 'form', :locals => { :form => form } %>
 
   <%= submit_tag "Submit", :class => 'btn' %>
+  &nbsp;
+  <%= link_to 'Cancel', user_projects_path(@current_user) %>
 
 <% end %>
 

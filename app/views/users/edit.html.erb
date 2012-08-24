@@ -1,13 +1,6 @@
 <h1>Update profile</h1>
 
-<% if @user.errors.any? %>
-<div class="alert alert-error">
-  <p>User could not be saved, the following errors occurred:</p>
-  <% @user.errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>
-</div>
-<% end %>
+<%= render :partial => 'partials/form_errors', :locals => { :model => @user } %>
 
 <%= form_for :user, :url => user_path(@user), :html => { :method => 'put' } do |form| %>
 

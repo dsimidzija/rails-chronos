@@ -1,13 +1,6 @@
 <h1>Edit project</h1>
 
-<% if @project.errors.any? %>
-<div class="alert alert-error">
-  <p>Project could not be saved, the following errors occurred:</p>
-  <% @project.errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>
-</div>
-<% end %>
+<%= render :partial => 'partials/form_errors', :locals => { :model => @project } %>
 
 <%= form_for :project, :url => user_project_path(@current_user, @project),
   :html => { :method => 'put' } do |form| %>
