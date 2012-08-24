@@ -5,7 +5,9 @@ Chronos::Application.routes.draw do
 
   post 'sessions/create'
 
-  resources :users
+  resources :users do
+    resources :projects
+  end
 
   root :to => 'sessions#new'
 
