@@ -1,0 +1,31 @@
+<h1>Dashboard</h1>
+
+<% for entry in @time_entries %>
+  <div class="time_entry">
+    <%= entry.entry_date %> <%= entry.start_time %> <%= entry.time_in_hours.round 2 %>
+  </div>
+<% end %>
+
+<div>
+  <%= render :partial => 'partials/form_errors', :locals => { :model => @tracking } %>
+
+  <%= form_for @tracking, :url => user_tracking_start_path(@current_user) do |form| %>
+
+    <div class="input-prepend">
+      <%= collection_select :tracking,
+          :project_id,
+          @current_user.projects,
+          :id,
+          :name,
+          :prompt => '(Select a project)' %>
+    </div>
+
+    <div class="input-prepend">
+      <%= form.text_area :note, :placeholder => 'Note',
+            :rows => 4,
+            :class => 'span3' %>
+    </div>
+
+    <%= submit_tag 'Start tracking', :class => 'btn' %>
+  <% end %>
+</div>

@@ -26,7 +26,7 @@ class TimeEntriesController < ApplicationController
   end
 
   def update
-    if @time_entry.update_attributes(params[:project])
+    if @time_entry.update_attributes(params[:time_entry])
       flash[:success] = 'Entry saved'
       redirect_to user_time_entries_path(@current_user)
     else

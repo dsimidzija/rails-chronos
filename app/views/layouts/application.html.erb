@@ -15,7 +15,7 @@
         <ul class="nav">
           <li><%= link_to 'Home', root_path %></li>
           <% if logged_in? %>
-            <li><a href="#">Tracking</a></li>
+            <li><%= link_to 'Dashboard', user_tracking_dashboard_path(@current_user) %></li>
             <li><a href="#">Reports</a></li>
             <li><%= link_to 'Projects', user_projects_path(@current_user) %></li>
             <li><%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %></li>

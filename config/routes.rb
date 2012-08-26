@@ -8,6 +8,9 @@ Chronos::Application.routes.draw do
   resources :users do
     resources :projects
     resources :time_entries
+
+    match "dashboard" => 'tracking#dashboard', :as => :tracking_dashboard
+    match "tracking/start" => 'tracking#start', :method => :post, :as => :tracking_start
   end
 
   root :to => 'sessions#new'

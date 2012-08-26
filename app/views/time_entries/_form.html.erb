@@ -8,15 +8,15 @@
 </div>
 
 <div class="input-prepend">
-  <%= form.text_field :entry_date, :placeholder => 'Date', :class => 'span3'  %>
+  <%= form.text_field :entry_date_formatted, :placeholder => 'Date', :class => 'span3'  %>
 </div>
 
 <div class="input-prepend">
-  <%= form.text_field :start_time, :placeholder => 'Start time', :class => 'span3'  %>
+  <%= form.text_field :start_time_formatted, :placeholder => 'Start time', :class => 'span3'  %>
 </div>
 
 <div class="input-prepend">
-  <%= form.text_field :end_time, :placeholder => 'End time', :class => 'span3'  %>
+  <%= form.text_field :end_time_formatted, :placeholder => 'End time', :class => 'span3'  %>
 </div>
 
 <div class="input-prepend">
@@ -28,11 +28,11 @@
 script = <<END
 
 $(document).ready(function() {
-  $('#time_entry_entry_date').datepicker({
+  $('#time_entry_entry_date_formatted').datepicker({
     dateFormat: 'dd.mm.yy',
   });
 
-  $('#time_entry_start_time, #time_entry_end_time').timepicker({
+  $('#time_entry_start_time_formatted, #time_entry_end_time_formatted').timepicker({
     timeFormat: 'hh:mm',
   });
 });
