@@ -46,6 +46,13 @@
       </td>
     </tr>
     <% end %>
+    <% if @time_entries.empty? %>
+    <tr>
+      <td colspan="9">
+        ...dust...
+      </td>
+    </tr>
+    <% end %>
   </tbody>
 </table>
 

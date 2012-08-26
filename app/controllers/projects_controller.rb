@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   before_filter :login_required
+  before_filter :user_allowed_access?
   before_filter :find_project, :only => [:edit, :update, :show, :destroy]
+  before_filter :confirm_user_owns_record, :only => [:edit, :update, :destroy]
 
   def new
     @project = Project.new
@@ -34,7 +36,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.find :all
+    @projects = Project.find(:all, :conditions => { :user_id => @current_user })
   end
 
   def show
@@ -53,4 +55,10 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
+  def confirm_user_owns_record
+    if @project.user_id != @current_user.id
+      flash[:error] = 'You\'re not allowed to go there'
+      redirect_to root_path(@current_user)
+    end
+  end
 end

@@ -1,6 +1,8 @@
 class TimeEntriesController < ApplicationController
   before_filter :login_required
+  before_filter :user_allowed_access?
   before_filter :find_entry, :only => [:edit, :update, :destroy]
+  before_filter :confirm_user_owns_record, :only => [:edit, :update, :destroy]
 
   def new
     @time_entry = TimeEntry.new
@@ -34,7 +36,9 @@ class TimeEntriesController < ApplicationController
   end
 
   def index
-    @time_entries = TimeEntry.find :all
+    @time_entries = TimeEntry.find(:all,
+        :order => 'entry_date DESC, start_time DESC',
+        :conditions => { :user_id => @current_user })
   end
 
   def destroy
@@ -48,5 +52,12 @@ class TimeEntriesController < ApplicationController
 
   def find_entry
     @time_entry = TimeEntry.find(params[:id])
+  end
+
+  def confirm_user_owns_record
+    if @time_entry.user_id != @current_user.id
+      flash[:error] = 'You\'re not allowed to go there'
+      redirect_to user_time_entries_path(@current_user)
+    end
   end
 end
