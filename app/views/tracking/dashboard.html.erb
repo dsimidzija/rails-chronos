@@ -2,10 +2,17 @@
 
 <% for entry in @time_entries %>
   <div class="time_entry">
-    <%= entry.entry_date %> <%= entry.start_time %> <%= entry.time_in_hours.round 2 %>
+    <dl>
+      <dt>Date</dt>
+      <dd><%= entry.entry_date %></dd>
+      <dt>Start time</dt>
+      <dd><%= entry.start_time %></dd>
+      <dt>Hours so far</dt>
+      <dd><%= entry.time_in_hours.round 2 %></dd>
   </div>
 <% end %>
 
+<% unless @time_entries.any? %>
 <div>
   <%= render :partial => 'partials/form_errors', :locals => { :model => @tracking } %>
 
@@ -29,3 +36,4 @@
     <%= submit_tag 'Start tracking', :class => 'btn' %>
   <% end %>
 </div>
+<% end %>
