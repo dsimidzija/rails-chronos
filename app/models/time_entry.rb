@@ -16,7 +16,7 @@ class TimeEntry < ActiveRecord::Base
   end
 
   def percent_of_day
-    time_in_hours / 8
+    (time_in_hours / 8) * 100
   end
 
   def percent_of_month
