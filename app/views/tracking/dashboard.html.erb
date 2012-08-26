@@ -9,6 +9,8 @@
       <dd><%= entry.start_time %></dd>
       <dt>Hours so far</dt>
       <dd><%= entry.time_in_hours.round 2 %></dd>
+      <dt>Percent of day</dt>
+      <dd><%= number_to_percentage entry.percent_of_day, :precision => 0 %></dd>
   </div>
 <% end %>
 
