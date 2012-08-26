@@ -1,4 +1,5 @@
 class TimeEntriesController < ApplicationController
+  before_filter :login_required
   before_filter :find_entry, :only => [:edit, :update, :destroy]
 
   def new
@@ -7,6 +8,7 @@ class TimeEntriesController < ApplicationController
 
   def create
     @time_entry = TimeEntry.new(params[:time_entry])
+    @time_entry.user = @current_user
 
     if not @time_entry.save
       flash.now[:notice] = 'Could not save the entry'
@@ -28,6 +30,7 @@ class TimeEntriesController < ApplicationController
     else
       flash.now[:notice] = 'Could not save the entry'
       render :action => 'edit'
+    end
   end
 
   def index

@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_filter :login_required
   before_filter :find_project, :only => [:edit, :update, :show, :destroy]
 
   def new
@@ -7,6 +8,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
+    @project.user = @current_user
 
     if not @project.save
       flash.now[:notice] = 'Could not save the project'

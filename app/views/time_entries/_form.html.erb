@@ -1,0 +1,42 @@
+<div class="input-prepend">
+  <%= collection_select :time_entry,
+        :project_id,
+        @current_user.projects,
+        :id,
+        :name,
+        :prompt => '(Select a project)' %>
+</div>
+
+<div class="input-prepend">
+  <%= form.text_field :entry_date, :placeholder => 'Date', :class => 'span3'  %>
+</div>
+
+<div class="input-prepend">
+  <%= form.text_field :start_time, :placeholder => 'Start time', :class => 'span3'  %>
+</div>
+
+<div class="input-prepend">
+  <%= form.text_field :end_time, :placeholder => 'End time', :class => 'span3'  %>
+</div>
+
+<div class="input-prepend">
+  <%= form.text_area :note, :placeholder => 'Note',
+        :rows => 4,
+        :class => 'span3' %>
+</div>
+<%
+script = <<END
+
+$(document).ready(function() {
+  $('#time_entry_entry_date').datepicker({
+    dateFormat: 'dd.mm.yy',
+  });
+
+  $('#time_entry_start_time, #time_entry_end_time').timepicker({
+    timeFormat: 'hh:mm',
+  });
+});
+
+END
+%>
+<%= javascript_tag script %>

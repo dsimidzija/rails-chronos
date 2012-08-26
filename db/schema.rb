@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824170818) do
+ActiveRecord::Schema.define(:version => 20120825121844) do
 
   create_table "projects", :force => true do |t|
     t.integer  "user_id"
@@ -23,12 +23,16 @@ ActiveRecord::Schema.define(:version => 20120824170818) do
   create_table "time_entries", :force => true do |t|
     t.integer  "user_id"
     t.integer  "project_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
+    t.time     "start_time"
+    t.time     "end_time"
     t.text     "note"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.date     "entry_date"
   end
+
+  add_index "time_entries", ["user_id", "entry_date"], :name => "index_time_entries_on_user_id_and_entry_date"
+  add_index "time_entries", ["user_id", "project_id", "entry_date"], :name => "index_time_entries_on_user_id_and_project_id_and_entry_date"
 
   create_table "users", :force => true do |t|
     t.string   "name"

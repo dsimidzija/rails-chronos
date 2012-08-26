@@ -1,3 +1,12 @@
 <h1>Create a new entry</h1>
 
+<%= render :partial => 'partials/form_errors', :locals => { :model => @time_entry } %>
 
+<%= form_for :time_entry, :url => user_time_entries_path(@current_user) do |form| %>
+
+  <%= render :partial => 'form', :locals => { :form => form } %>
+  <%= submit_tag "Submit", :class => 'btn' %>
+  &nbsp;
+  <%= link_to 'Cancel', user_projects_path(@current_user) %>
+
+<% end %>

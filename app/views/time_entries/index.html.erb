@@ -1,16 +1,44 @@
 <h1>Time entries</h1>
 
 <table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Duration (h)</th>
+      <th>Daily %</th>
+      <th>Project</th>
+      <th>Note</th>
+      <th collspan="2">&nbsp;</th>
+    </tr>
+  </thead>
   <tbody>
     <% for entry in @time_entries %>
     <tr>
       <td>
+        <%= entry.entry_date %>
+      </td>
+      <td>
+        <%= entry.start_time %>
+      </td>
+      <td>
+        <%= entry.end_time %>
+      </td>
+      <td>
+        <%= entry.time_in_hours.round 2 %>
+      </td>
+      <td>
+        <%= entry.percent_of_day.round 2 %>
+      </td>
+      <td>
         <%= link_to h(entry.project.name), user_project_path(@current_user, entry.project) %>
       </td>
-      <td style="width: 50px;">
-        <%= link_to 'Edit', edit_user_time_entry_path(@current_user, entry), :class => 'btn' %>
+      <td>
+        <%= entry.note %>
       </td>
-      <td style="width: 50px;">
+      <td style="width: 150px;">
+        <%= link_to 'Edit', edit_user_time_entry_path(@current_user, entry), :class => 'btn' %>
         <%= link_to 'Delete', user_time_entry_path(@current_user, entry),
           :confirm => 'Are you sure?',
           :method => :delete,
@@ -23,7 +51,7 @@
 
 <div class="btn-toolbar">
   <div class="btn-group">
-    <%= link_to 'Add new project', new_user_time_entry_path(@current_user), :class => 'btn' %>
+    <%= link_to 'Add new entry', new_user_time_entry_path(@current_user), :class => 'btn' %>
   </div>
 </div>
 

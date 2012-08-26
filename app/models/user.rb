@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
     user && user.authenticated?(password) ? user : nil
   end
 
+  def authenticated?(password)
+    encrypted_password == User.encrypt(password, salt)
+  end
+
   protected
 
   def encrypt_password
@@ -34,10 +38,6 @@ class User < ActiveRecord::Base
     end
 
     self.encrypted_password = User.encrypt(password, salt)
-  end
-
-  def authenticated?(password)
-    encrypted_password == User.encrypt(password, salt)
   end
 
   def password_required?

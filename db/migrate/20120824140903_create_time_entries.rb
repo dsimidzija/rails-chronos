@@ -1,5 +1,5 @@
 class CreateTimeEntries < ActiveRecord::Migration
-  def self.up
+  def change
     create_table :time_entries do |t|
 
       t.integer   :user_id
@@ -10,9 +10,5 @@ class CreateTimeEntries < ActiveRecord::Migration
 
       t.timestamps
     end
-  end
-
-  def self.down
-    drop_table :time_entries
   end
 end

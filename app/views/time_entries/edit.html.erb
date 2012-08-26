@@ -1,2 +1,13 @@
-<h1>TimeEntries#edit</h1>
-<p>Find me in app/views/time_entries/edit.html.erb</p>
+<h1>Edit entry</h1>
+
+<%= render :partial => 'partials/form_errors', :locals => { :model => @time_entry } %>
+
+<%= form_for :time_entry, :url => user_time_entry_path(@current_user, @time_entry),
+  :html => { :method => 'put' } do |form| %>
+
+  <%= render :partial => 'form', :locals => { :form => form } %>
+
+  <%= submit_tag "Submit", :class => 'btn' %>
+
+<% end %>
+
