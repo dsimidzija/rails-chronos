@@ -37,18 +37,18 @@
       <td>
         <%= entry.note %>
       </td>
-      <td style="width: 150px;">
-        <%= link_to 'Edit', edit_user_time_entry_path(@current_user, entry), :class => 'btn' %>
+      <td style="width: 100px;">
+        <%= link_to 'Edit', edit_user_time_entry_path(@current_user, entry), :class => 'btn btn-mini' %>
         <%= link_to 'Delete', user_time_entry_path(@current_user, entry),
           :confirm => 'Are you sure?',
           :method => :delete,
-          :class => 'btn' %>
+          :class => 'btn btn-mini' %>
       </td>
     </tr>
     <% end %>
     <% if @time_entries.empty? %>
     <tr>
-      <td colspan="9">
+      <td colspan="9" style="text-align: center;">
         ...dust...
       </td>
     </tr>
