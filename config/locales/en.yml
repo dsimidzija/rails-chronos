@@ -2,6 +2,12 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  activerecord:
+    attributes:
+      time_entry:
+        entry_date_formatted: Entry date
+        start_time_formatted: Start time
+        end_time_formatted: End time
   date:
     formats:
       default: ! '%d.%m.%Y'
