@@ -38,6 +38,7 @@ class TrackingController < ApplicationController
   protected
 
   def find_tracking_entries
-    @time_entries = TimeEntry.find(:all, :conditions => { :end_time => nil })
+    @time_entries = TimeEntry.find(:all,
+      :conditions => { :entry_date => Date.today, :end_time => nil })
   end
 end

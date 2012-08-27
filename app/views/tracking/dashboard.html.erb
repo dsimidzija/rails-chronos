@@ -1,10 +1,15 @@
 <h1>Dashboard</h1>
 
 <% for entry in @time_entries %>
-  <div class="time_entry">
-    <p class="start_time">Tracking since: <%= entry.start_time %></p>
-    <p class="entry_time_counter" id="time-counter-<%= entry.id %>">00:00:00<p>
-    <p class="entry_percent_counter" id="percent-counter-<%= entry.id %>">&nbsp;<p>
+  <div class="row time_entry">
+    <div class="span4">
+      <div class="entry_date">Date: <%= entry.entry_date %></div>
+      <div class="start_time">Tracking since: <%= entry.start_time %></div>
+      <div class="target_time">Target: <%= entry.start_time + 8.hours %></div>
+    </div>
+    <div class="span5 counter_container" >
+      <div class="entry_time_counter" id="time-counter-<%= entry.id %>">00:00:00</div>
+    </div>
 <%
 entry_script = <<END
 $(document).ready(function() {
@@ -16,42 +21,18 @@ $(document).ready(function() {
   var timer_#{entry.id} = $.timer(function() {
     var diff = new TimePeriod(start_date, new Date());
     $('#time-counter-#{entry.id}').text(time_period_string(diff));
-  });
-
-  timer_#{entry.id}.set({ time : 1000, autostart : true });
+  }).set({ time : 1000, autostart : true });
 });
 END
 %>
     <%= javascript_tag entry_script %>
+
+    <%= render :partial => 'stop_form', :locals => { :current_user => @current_user, :tracking => entry } %>
   </div>
 <% end %>
 
 <div>
-<% if @time_entries.any? %>
-  <%= form_for @tracking, :url => user_tracking_stop_path(@current_user, @tracking) do |form| %>
-    <%= submit_tag 'Stop tracking', :class => 'btn' %>
-  <% end %>
-<% else %>
-  <%= render :partial => 'partials/form_errors', :locals => { :model => @tracking } %>
-
-  <%= form_for @tracking, :url => user_tracking_start_path(@current_user) do |form| %>
-
-    <div class="input-prepend">
-      <%= collection_select :tracking,
-          :project_id,
-          @current_user.projects,
-          :id,
-          :name,
-          :prompt => '(Select a project)' %>
-    </div>
-
-    <div class="input-prepend">
-      <%= form.text_area :note, :placeholder => 'Note',
-            :rows => 4,
-            :class => 'span3' %>
-    </div>
-
-    <%= submit_tag 'Start tracking', :class => 'btn' %>
-  <% end %>
+<% if @time_entries.empty? %>
+  <%= render :partial => 'start_form', :locals => { :current_user => @current_user, :tracking => @tracking } %>
 <% end %>
 </div>

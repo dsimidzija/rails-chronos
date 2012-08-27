@@ -1,0 +1,5 @@
+<%= form_for tracking, :url => user_tracking_stop_path(current_user, tracking) do |form| %>
+
+  <%= submit_tag 'Stop tracking', :class => 'btn' %>
+
+<% end %>

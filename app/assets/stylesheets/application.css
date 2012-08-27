@@ -10,5 +10,9 @@
  *
  *= require_self
  *= require jquery.ui.all
- *= require_tree .
+ *= require ./bootstrap/css/bootstrap
+ *= require ./jquery-ui-timepicker-addon
+ *= require ./default
+ *= require ./time_entries
+ *= require ./tracking
  */

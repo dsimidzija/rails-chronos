@@ -1,8 +1,40 @@
+.time_entry
+{
+  position: relative;
+  padding: 20px;
+  margin-bottom: 30px;
+  background-color: #eeeeee;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.time_entry
+{
+  margin-left: 0px;
+}
+
+.time_entry div.counter_container
+{
+  background-color: #ffffff;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.time_entry input.btn
+{
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
 
 .entry_time_counter
 {
   margin: auto;
-  padding: 10px;
-  font-family: monospace;
+  padding: 30px 10px 30px 10px;
+  text-align: center;
+  font-family: 'Palatino Linotype', monospace;
   font-size: 72px;
 }
+

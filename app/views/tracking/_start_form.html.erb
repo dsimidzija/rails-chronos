@@ -1,0 +1,22 @@
+<%= render :partial => 'partials/form_errors', :locals => { :model => @tracking } %>
+
+<%= form_for @tracking, :url => user_tracking_start_path(@current_user) do |form| %>
+
+  <div class="input-prepend">
+    <%= collection_select :tracking,
+        :project_id,
+        @current_user.projects,
+        :id,
+        :name,
+        :prompt => '(Select a project)' %>
+  </div>
+
+  <div class="input-prepend">
+    <%= form.text_area :note, :placeholder => 'Note',
+          :rows => 4,
+          :class => 'span3' %>
+  </div>
+
+  <%= submit_tag 'Start tracking', :class => 'btn' %>
+
+<% end %>
