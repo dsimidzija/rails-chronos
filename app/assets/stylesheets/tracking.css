@@ -1,4 +1,8 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+
+.entry_time_counter
+{
+  margin: auto;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 72px;
+}

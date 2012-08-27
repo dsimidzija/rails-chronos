@@ -28,6 +28,10 @@ class Tracking
     t.save
   end
 
-  def stop(time_entry_id)
+  def self.stop(time_entry_id)
+    t = TimeEntry.find(time_entry_id)
+    # check if empty
+    t.end_time = Time.now
+    t.save
   end
 end

@@ -1,2 +1,8 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+
+function pad(s) {
+	return (s.toString().length < 2) ? "0" + s : s;
+}
+
+function time_period_string(period) {
+	return pad(period.hours) + ':' + pad(period.minutes) + ':' + pad(period.seconds)
+}

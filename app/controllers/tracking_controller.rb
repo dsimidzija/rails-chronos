@@ -4,7 +4,8 @@ class TrackingController < ApplicationController
 
   def dashboard
     find_tracking_entries
-    @tracking = Tracking.new
+    @tracking = Tracking.new unless @time_entries.any?
+    @tracking = @time_entries.first if @time_entries.any?
   end
 
   def start
@@ -26,6 +27,11 @@ class TrackingController < ApplicationController
     end
 
     flash[:info] = 'Tracking started'
+    redirect_to :action => 'dashboard'
+  end
+
+  def stop
+    Tracking.stop(params[:id])
     redirect_to :action => 'dashboard'
   end
 

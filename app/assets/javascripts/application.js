@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require jquery-ui-timepicker-addon
+//= require jquery.timer
+//= require date
+//= require time
+//= require time_entries
+//= require tracking

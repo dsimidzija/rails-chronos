@@ -2,20 +2,36 @@
 
 <% for entry in @time_entries %>
   <div class="time_entry">
-    <dl>
-      <dt>Date</dt>
-      <dd><%= entry.entry_date %></dd>
-      <dt>Start time</dt>
-      <dd><%= entry.start_time %></dd>
-      <dt>Hours so far</dt>
-      <dd><%= entry.time_in_hours.round 2 %></dd>
-      <dt>Percent of day</dt>
-      <dd><%= number_to_percentage entry.percent_of_day, :precision => 0 %></dd>
+    <p class="start_time">Tracking since: <%= entry.start_time %></p>
+    <p class="entry_time_counter" id="time-counter-<%= entry.id %>">00:00:00<p>
+    <p class="entry_percent_counter" id="percent-counter-<%= entry.id %>">&nbsp;<p>
+<%
+entry_script = <<END
+$(document).ready(function() {
+  var start_date = new Date(
+      #{entry.entry_date.year}, #{entry.entry_date.month}, #{entry.entry_date.day},
+      #{entry.start_time.hour}, #{entry.start_time.min}, 0
+    );
+
+  var timer_#{entry.id} = $.timer(function() {
+    var diff = new TimePeriod(start_date, new Date());
+    $('#time-counter-#{entry.id}').text(time_period_string(diff));
+  });
+
+  timer_#{entry.id}.set({ time : 1000, autostart : true });
+});
+END
+%>
+    <%= javascript_tag entry_script %>
   </div>
 <% end %>
 
-<% unless @time_entries.any? %>
 <div>
+<% if @time_entries.any? %>
+  <%= form_for @tracking, :url => user_tracking_stop_path(@current_user, @tracking) do |form| %>
+    <%= submit_tag 'Stop tracking', :class => 'btn' %>
+  <% end %>
+<% else %>
   <%= render :partial => 'partials/form_errors', :locals => { :model => @tracking } %>
 
   <%= form_for @tracking, :url => user_tracking_start_path(@current_user) do |form| %>
@@ -37,5 +53,5 @@
 
     <%= submit_tag 'Start tracking', :class => 'btn' %>
   <% end %>
-</div>
 <% end %>
+</div>
