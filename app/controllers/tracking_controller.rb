@@ -39,6 +39,11 @@ class TrackingController < ApplicationController
 
   def find_tracking_entries
     @time_entries = TimeEntry.find(:all,
-      :conditions => { :entry_date => Date.today, :end_time => nil })
+      :conditions => {
+        :entry_date => Date.today,
+        :end_time => nil,
+        :user_id => @current_user.id
+      },
+      :order => { :start_time => :asc })
   end
 end

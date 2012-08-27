@@ -28,7 +28,7 @@ class TimeEntry < ActiveRecord::Base
     return if value.nil? or value.blank?
 
     begin
-      self.entry_date = DateTime.strptime(value, date_input_format)
+      self.entry_date = DateTime.strptime(value, date_input_format).to_date
     rescue
       add_input_range_error(:entry_date)
     end
