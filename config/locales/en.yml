@@ -4,7 +4,17 @@
 en:
   date:
     formats:
-      default: '%d.%m.%Y'
+      default: ! '%d.%m.%Y'
+      input: ! '%d.%m.%Y'
   time:
     formats:
-      default: '%H:%M'
+      default: ! '%H:%M'
+      input: ! '%H:%M'
+
+  date_js:
+    formats:
+      input: ! 'dd.mm.yy'
+
+  time_js:
+    formats:
+      input: ! 'hh:mm'

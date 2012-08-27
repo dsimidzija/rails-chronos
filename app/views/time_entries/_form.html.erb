@@ -29,11 +29,11 @@ script = <<END
 
 $(document).ready(function() {
   $('#time_entry_entry_date_formatted').datepicker({
-    dateFormat: 'dd.mm.yy',
+    dateFormat: '#{date_input_format_js}',
   });
 
   $('#time_entry_start_time_formatted, #time_entry_end_time_formatted').timepicker({
-    timeFormat: 'hh:mm',
+    timeFormat: '#{time_input_format_js}',
   });
 });
 

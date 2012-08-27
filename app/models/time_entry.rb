@@ -1,4 +1,6 @@
 class TimeEntry < ActiveRecord::Base
+  include FormatUtility
+
   belongs_to :user
   belongs_to :project
 
@@ -11,28 +13,35 @@ class TimeEntry < ActiveRecord::Base
   validates_format_of     :end_time_formatted, :with => /^\d{2}:\d{2}$/, :if => :both_timestamps_present?
 
   def entry_date_formatted
-    self.entry_date.strftime '%d.%m.%Y' unless self.entry_date.nil?
+    self.entry_date.strftime date_input_format unless self.entry_date.nil?
   end
 
   def entry_date_formatted=(value)
-    self.entry_date = DateTime.strptime(value, '%d.%m.%Y')
+    return if value.nil? or value.blank?
+    self.entry_date = DateTime.strptime(value, date_input_format)
   end
 
   def start_time_formatted
-    self.start_time.strftime '%H:%M' unless self.start_time.nil?
+    self.start_time.strftime time_input_format unless self.start_time.nil?
   end
 
   def start_time_formatted=(value)
-    self.start_time = DateTime.strptime(value, '%H:%M')
+    return if value.nil? or value.blank?
+    self.start_time = DateTime.strptime(value, time_input_format)
   end
 
   def end_time_formatted
-    return self.end_time.strftime '%H:%M' unless self.end_time.nil?
+    return self.end_time.strftime time_input_format unless self.end_time.nil?
   end
 
   def end_time_formatted=(value)
-    return if value.nil? or value.blank?
-    self.end_time = DateTime.strptime(value, '%H:%M')
+    # allow blanking end time
+    if value.nil? or value.blank?
+      self.end_time = nil
+      return
+    end
+
+    self.end_time = DateTime.strptime(value, time_input_format)
   end
 
   def time_in_hours
@@ -68,4 +77,5 @@ class TimeEntry < ActiveRecord::Base
   def start_time_before_end_time
     errors.add(:end_time, 'cannot be before start time') unless end_time > start_time
   end
+
 end
