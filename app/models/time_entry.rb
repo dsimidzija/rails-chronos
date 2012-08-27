@@ -11,7 +11,7 @@ class TimeEntry < ActiveRecord::Base
   validates_format_of     :end_time_formatted, :with => /^\d{2}:\d{2}$/, :if => :both_timestamps_present?
 
   def entry_date_formatted
-    self.entry_date.strftime '%d.%m.%Y'
+    self.entry_date.strftime '%d.%m.%Y' unless self.entry_date.nil?
   end
 
   def entry_date_formatted=(value)
@@ -19,7 +19,7 @@ class TimeEntry < ActiveRecord::Base
   end
 
   def start_time_formatted
-    self.start_time.strftime '%H:%M'
+    self.start_time.strftime '%H:%M' unless self.start_time.nil?
   end
 
   def start_time_formatted=(value)
@@ -31,6 +31,7 @@ class TimeEntry < ActiveRecord::Base
   end
 
   def end_time_formatted=(value)
+    return if value.nil? or value.blank?
     self.end_time = DateTime.strptime(value, '%H:%M')
   end
 
