@@ -4,12 +4,11 @@ class User < ActiveRecord::Base
 
   attr_accessor   :password
   attr_accessible :name, :email, :password, :password_confirmation
-  attr_readonly   :email
 
   validates_presence_of     :name
   validates_length_of       :email, :within => 5..100
   validates_uniqueness_of   :email, :case_sensitive => false
-  validates_email_format_of :email, :on => :create
+  validates_email_format_of :email
   validates_length_of       :password, :within => 8..40, :if => :password_required?
   validates_confirmation_of :password, :if => :password_required?
 
