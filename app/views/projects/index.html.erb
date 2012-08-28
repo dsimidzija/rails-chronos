@@ -7,14 +7,13 @@
       <td>
         <%= link_to h(project.name), user_project_path(@current_user, project) %>
       </td>
-      <td style="width: 50px;">
-        <%= link_to 'Edit', edit_user_project_path(@current_user, project), :class => 'btn' %>
-      </td>
-      <td style="width: 50px;">
+      <td style="width: 100px;">
+        <%= link_to 'Edit', edit_user_project_path(@current_user, project),
+          :class => 'btn btn-mini' %>
         <%= link_to 'Delete', user_project_path(@current_user, project),
           :confirm => 'Are you sure?',
           :method => :delete,
-          :class => 'btn' %>
+          :class => 'btn btn-mini' %>
       </td>
     </tr>
     <% end %>
