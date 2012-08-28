@@ -4,4 +4,4 @@ log/*.log
 tmp/
 *.swp
 Gemfile.lock
-production-start.bat
+production-start.vbs
