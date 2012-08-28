@@ -1,4 +1,22 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+
+table.monthly_report td,
+table.monthly_report th
+{
+  border: 1px solid #000000;
+}
+
+table.monthly_report td
+{
+  width: 30px;
+  text-align: center;
+}
+
+th.weekend
+{
+  color: #ff1234;
+}
+
+td.weekend
+{
+  background-color: #EEEEEE;
+}

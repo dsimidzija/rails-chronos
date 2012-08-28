@@ -12,6 +12,8 @@ Chronos::Application.routes.draw do
     match "dashboard" => 'tracking#dashboard', :as => :tracking_dashboard
     match "tracking/start" => 'tracking#start', :method => :post, :as => :tracking_start
     match "tracking/:id/stop" => 'tracking#stop', :method => :post, :as => :tracking_stop
+
+    match "reports/current/month" => 'reports#current_month', :as => :monthly_report
   end
 
   root :to => 'sessions#new'

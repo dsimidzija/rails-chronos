@@ -1,0 +1,38 @@
+<h1>Monthly overview</h1>
+
+<% if @entries.any? %>
+  <table class="monthly_report">
+    <tr>
+      <% for date in @today.at_beginning_of_month..@today.at_end_of_month %>
+      <th class="<%= 'weekend' if [0,6].include?(date.wday) %>">
+        <%= date.day %>
+      </th>
+      <% end %>
+    </tr>
+    <tr>
+      <% for date in @today.at_beginning_of_month..@today.at_end_of_month %>
+      <td class="<%= 'weekend' if [0,6].include?(date.wday) %>">
+        <%= @times[date.day.to_s.to_sym] %>
+      </td>
+      <% end %>
+    </tr>
+    <tr>
+      <% for date in @today.at_beginning_of_month..@today.at_end_of_month %>
+      <td class="<%= 'weekend' if [0,6].include?(date.wday) %>">
+        <% percent = (@times[date.day.to_s.to_sym]/8).round(2) %>
+        <span class="<%= css_class_for_percent(percent, date) %>">
+          <%= percent %>
+        </span>
+      </td>
+      <% end %>
+    </tr>
+  </table>
+  <div>
+    <div>Work days: <%= @workdays %></div>
+    <div>Hours required: <%= @workdays*8 %></div>
+    <div>Total hours: <%= @times_sum.round 2 %></div>
+    <div>Status: <%= (@times_sum - (@workdays*8)).round 2 %></div>
+    <div>Percent completed: <%= number_to_percentage(
+      (@times_sum / (@workdays*8) * 100), :precision => 2) %></div>
+  </div>
+<% end %>

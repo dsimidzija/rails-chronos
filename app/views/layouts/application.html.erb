@@ -17,7 +17,7 @@
           <% if logged_in? %>
             <li><%= link_to 'Dashboard', user_tracking_dashboard_path(@current_user) %></li>
             <li><%= link_to 'Time entries', user_time_entries_path(@current_user) %></li>
-            <li><a href="#">Reports</a></li>
+            <li><%= link_to 'Reports', user_monthly_report_path(@current_user) %></li>
             <li><%= link_to 'Projects', user_projects_path(@current_user) %></li>
             <li><%= link_to 'Profile', user_path(@current_user) %></li>
             <li><%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %></li>

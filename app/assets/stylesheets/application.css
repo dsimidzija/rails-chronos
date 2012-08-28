@@ -15,4 +15,5 @@
  *= require ./default
  *= require ./time_entries
  *= require ./tracking
+ *= require ./reports
  */

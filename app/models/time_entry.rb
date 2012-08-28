@@ -80,14 +80,18 @@ class TimeEntry < ActiveRecord::Base
   end
 
   def percent_of_month
+    (time_in_hours / (TimeEntry.workdays(entry_date) * 8)) * 100
+  end
+
+  def self.workdays(date)
     workdays = 0
 
     # workdays: monday to friday
-    entry_date.at_beginning_of_month.upto(entry_date.at_end_of_month) do |day|
+    date.at_beginning_of_month.upto(date.at_end_of_month) do |day|
       workdays += 1 unless [0, 6].include?(day.wday)
     end
 
-    (time_in_hours / (workdays * 8)) * 100
+    workdays
   end
 
   protected
