@@ -14,6 +14,7 @@ table.monthly_report td
 th.weekend
 {
   color: #ff1234;
+  background-color: #EEEEEE;
 }
 
 td.weekend
