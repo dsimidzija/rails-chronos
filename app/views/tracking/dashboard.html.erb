@@ -1,35 +1,7 @@
-<h1>Dashboard</h1>
+<% content_for :title, 'Dashboard' %>
 
 <% for entry in @time_entries %>
-  <div class="row time_entry">
-    <div class="span3">
-      <div class="project">Project: <%= link_to entry.project.name, user_project_path(@current_user, entry.project) %></div>
-      <div class="entry_date">Date: <%= entry.entry_date %></div>
-      <div class="start_time">Tracking since: <%= entry.start_time %></div>
-      <div class="target_time">Target: <%= entry.start_time + 8.hours %></div>
-    </div>
-    <div class="span5 counter_container" >
-      <div class="entry_time_counter" id="time-counter-<%= entry.id %>">--:--:--</div>
-    </div>
-<%
-entry_script = <<END
-$(document).ready(function() {
-  var start_date = new Date(
-      #{entry.entry_date.year}, #{entry.entry_date.month}, #{entry.entry_date.day},
-      #{entry.start_time.hour}, #{entry.start_time.min}, 0
-    );
-
-  var timer_#{entry.id} = $.timer(function() {
-    var diff = new TimePeriod(start_date, new Date());
-    $('#time-counter-#{entry.id}').text(time_period_string(diff));
-  }).set({ time : 1000, autostart : true });
-});
-END
-%>
-    <%= javascript_tag entry_script %>
-
-    <%= render :partial => 'stop_form', :locals => { :current_user => @current_user, :tracking => entry } %>
-  </div>
+  <%= render :partial => 'time_entry', :locals => { :current_user => @current_user, :entry => entry } %>
 <% end %>
 
 <div>

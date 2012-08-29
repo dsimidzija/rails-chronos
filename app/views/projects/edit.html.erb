@@ -1,4 +1,4 @@
-<h1>Edit project</h1>
+<% content_for :title, 'Edit project' %>
 
 <%= render :partial => 'partials/form_errors', :locals => { :model => @project } %>
 
@@ -8,6 +8,8 @@
   <%= render :partial => 'form', :locals => { :form => form } %>
 
   <%= submit_tag "Submit", :class => 'btn' %>
+  &nbsp;
+  <%= link_to 'Cancel', user_project_path(@current_user, @project) %>
 
 <% end %>
 

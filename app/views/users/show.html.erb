@@ -1,7 +1,8 @@
-<h1><%= h @user.name %>'s profile</h1>
+<% content_for :title, @user.name + "'s profile" %>
+
 <dl>
   <dt>E-mail</dt>
-  <dd><%= h @user.email %>
+  <dd><%= @user.email %>
 </dl>
 
 <div class="btn-toolbar">

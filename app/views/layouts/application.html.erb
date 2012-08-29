@@ -1,38 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chronos</title>
+  <title><%= content_for?(:title) ? yield(:title) + ' || ' : '' %>Chronos</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-  <div class="container">
+  <div class="container-fluid">
+    <div class="row-fluid">
 
-    <div class="navbar">
-      <div class="navbar-inner">
-        <a class="brand" href="#">CHRONOS</a>
-        <ul class="nav">
-          <li><%= link_to 'Home', root_path %></li>
-          <% if logged_in? %>
-            <li><%= link_to 'Dashboard', user_tracking_dashboard_path(@current_user) %></li>
-            <li><%= link_to 'Time entries', user_time_entries_path(@current_user) %></li>
-            <li><%= link_to 'Reports', user_monthly_report_path(@current_user) %></li>
-            <li><%= link_to 'Projects', user_projects_path(@current_user) %></li>
-            <li><%= link_to 'Profile', user_path(@current_user) %></li>
-            <li><%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %></li>
-          <% else %>
-            <li><%= link_to "Login", new_session_path %></li>
-            <li><%= link_to "Register", new_user_path %></li>
-          <% end %>
-        </ul>
+      <div class="span2">
+
+        <div class="navbar">
+          <div class="navbar-inner">
+            <h1>CHRONOS</h1>
+          </div>
+        </div>
+
+        <div style="max-width: 340px; padding: 8px 0;" class="well">
+          <ul class="nav nav-list">
+            <% if logged_in? %>
+              <li class="nav-header">User menu</li>
+              <li><%= link_to 'Dashboard', user_tracking_dashboard_path(@current_user) %></li>
+              <li><%= link_to 'Time entries', user_time_entries_path(@current_user) %></li>
+              <li><%= link_to 'Reports', user_monthly_report_path(@current_user) %></li>
+              <li><%= link_to 'Projects', user_projects_path(@current_user) %></li>
+              <li class="divider"></li>
+              <li><%= link_to 'Profile', user_path(@current_user) %></li>
+              <li><%= link_to "Logout", :controller => 'sessions', :action => 'destroy' %></li>
+            <% else %>
+              <li class="nav-header">Menu</li>
+              <li><%= link_to 'Home', root_path %></li>
+              <li><%= link_to "Login", new_session_path %></li>
+              <li><%= link_to "Register", new_user_path %></li>
+            <% end %>
+          </ul>
+        </div>
+
       </div>
+
+      <div class="span10">
+
+        <% if content_for?(:title) %>
+        <div class="page_title">
+          <h1><%= yield(:title) %>&nbsp;</h1>
+        </div>
+        <% end %>
+
+        <%= render 'partials/flash', :flash => flash %>
+        <%= yield :layout %>
+
+      </div>
+
     </div>
-
-    <%= render 'partials/flash', :flash => flash %>
-
-    <%= yield :layout %>
-
   </div>
 </body>
 </html>

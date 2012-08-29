@@ -1,9 +1,9 @@
-<h1>
-  <%= link_to 'Projects', user_projects_path(@current_user) %>
-  &rarr; <%= h @project.name %>
-</h1>
+<% content_for :title, 'Project ' + @project.name %>
 
 <div>
-  <%= h @project.description %>
+  <p>Description:</p>
+  <p><%= @project.description %></p>
 </div>
+
+<%= link_to 'Back to project list', user_projects_path(@current_user) %>
 

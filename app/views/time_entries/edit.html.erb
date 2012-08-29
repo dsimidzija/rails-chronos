@@ -1,4 +1,4 @@
-<h1>Edit entry</h1>
+<% content_for :title, 'Edit time entry' %>
 
 <%= render :partial => 'partials/form_errors', :locals => { :model => @time_entry } %>
 
@@ -8,6 +8,8 @@
   <%= render :partial => 'form', :locals => { :form => form } %>
 
   <%= submit_tag "Submit", :class => 'btn' %>
+  &nbsp;
+  <%= link_to 'Cancel', user_time_entries_path(@current_user) %>
 
 <% end %>
 

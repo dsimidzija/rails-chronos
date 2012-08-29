@@ -1,11 +1,12 @@
-<h1>Update profile</h1>
+<% content_for :title, 'Update profile' %>
 
 <%= render :partial => 'partials/form_errors', :locals => { :model => @user } %>
 
 <%= form_for :user, :url => user_path(@user), :html => { :method => 'put' } do |form| %>
 
   <div class="input-prepend">
-    <span class="add-on">A</span><%= form.text_field :name, :placeholder => 'Name' %>
+    <span class="add-on">A</span>
+    <%= form.text_field :name, :placeholder => 'Name', :class => 'span4' %>
   </div>
 
   <div class="input-prepend">
@@ -14,11 +15,13 @@
   </div>
 
   <div class="input-prepend">
-    <span class="add-on">*</span><%= form.password_field :password, :placeholder => 'Password' %>
+    <span class="add-on">*</span>
+    <%= form.password_field :password, :placeholder => 'Password', :class => 'span4' %>
   </div>
 
   <div class="input-prepend">
-    <span class="add-on">**</span><%= form.password_field :password_confirmation, :placeholder => 'Password confirmation' %>
+    <span class="add-on">**</span>
+    <%= form.password_field :password_confirmation, :placeholder => 'Password confirmation', :class => 'span4' %>
   </div>
 
   <%= submit_tag "Submit", :class => 'btn' %>

@@ -1,5 +1,7 @@
 .time_entry
 {
+  margin-left: 0px;
+  max-width: 640px;
   position: relative;
   padding: 20px;
   margin-bottom: 30px;
@@ -7,11 +9,6 @@
   -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;
-}
-
-.time_entry
-{
-  margin-left: 0px;
 }
 
 .time_entry div.counter_container
@@ -24,9 +21,7 @@
 
 .time_entry input.btn
 {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+  margin-top: 10px;
 }
 
 .entry_time_counter
@@ -37,4 +32,10 @@
   font-family: monospace;
   font-size: 72px;
 }
+
+form.edit_time_entry
+{
+  margin: 0px;
+}
+
 
