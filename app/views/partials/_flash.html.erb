@@ -1,20 +1,5 @@
-<% if flash[:notice] %>
-  <div class="alert alert-block">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-<% if flash[:error] %>
-  <div class="alert alert-error">
-    <%= flash[:error] %>
-  </div>
-<% end %>
-<% if flash[:success] %>
-  <div class="alert alert-success">
-    <%= flash[:success] %>
-  </div>
-<% end %>
-<% if flash[:info] %>
-  <div class="alert alert-info">
-    <%= flash[:info] %>
+<% flash.each do |name, message| %>
+  <div class="alert alert-<%= (name == :notice) ? 'block' : name.to_s %>">
+    <%= content_tag :div, message, :id => "flash_#{name}" if message.is_a?(String) %>
   </div>
 <% end %>
