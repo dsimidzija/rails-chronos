@@ -3,27 +3,42 @@
 <% if @entries.any? %>
   <table class="monthly_report">
     <tr>
-      <% for date in @today.at_beginning_of_month..@today.at_end_of_month %>
+      <% for date in @start..@end %>
       <th class="<%= 'weekend' if [0,6].include?(date.wday) %>">
         <%= date.day %>
       </th>
       <% end %>
     </tr>
     <tr>
-      <% for date in @today.at_beginning_of_month..@today.at_end_of_month %>
+      <% for date in @start..@end %>
       <td class="<%= 'weekend' if [0,6].include?(date.wday) %>">
         <%= @times[date.day.to_s.to_sym] %>
       </td>
       <% end %>
     </tr>
+    <% @times_by_project.each do |project_name, time| %>
+      <tr>
+        <td class="project_name" colspan="<%= @days_in_month %>">
+          <%= project_name %>
+        </td>
+      </tr>
+      <tr>
+        <% for date in @start..@end %>
+          <% percent = (time[date.day.to_s.to_sym]/8).round(2) %>
+          <td class="<%= 'weekend' if [0,6].include?(date.wday) %> <%= css_class_for_empty_cell(percent) %>">
+            <%= percent unless percent == 0 %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
     <tr>
-      <% for date in @today.at_beginning_of_month..@today.at_end_of_month %>
-      <td class="<%= 'weekend' if [0,6].include?(date.wday) %>">
+      <% for date in @start..@end %>
         <% percent = (@times[date.day.to_s.to_sym]/8).round(2) %>
-        <span class="<%= css_class_for_percent(percent, date) %>">
-          <%= percent %>
-        </span>
-      </td>
+        <td class="<%= 'weekend' if [0,6].include?(date.wday) %>">
+          <span class="<%= css_class_for_percent(percent, date) %>">
+            <%= percent %>
+          </span>
+        </td>
       <% end %>
     </tr>
   </table>

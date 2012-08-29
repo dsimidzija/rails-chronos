@@ -7,4 +7,8 @@ module ReportsHelper
     return 'label label-success' if percent >= 1.1
     'label label-info'
   end
+
+  def css_class_for_empty_cell(percent)
+    'empty' if percent == 0
+  end
 end

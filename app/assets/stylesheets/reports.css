@@ -1,4 +1,9 @@
 
+.monthly_report td
+{
+  min-width: 32px;
+}
+
 table.monthly_report td,
 table.monthly_report th
 {
@@ -17,7 +22,8 @@ th.weekend
   background-color: #EEEEEE;
 }
 
-td.weekend
+td.weekend,
+td.empty
 {
   background-color: #EEEEEE;
 }
