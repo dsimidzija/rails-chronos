@@ -4,16 +4,31 @@
   min-width: 32px;
 }
 
-table.monthly_report td,
-table.monthly_report th
+.monthly_report td,
+.monthly_report th
 {
   border: 1px solid #000000;
 }
 
-table.monthly_report td
+.monthly_report td
 {
   width: 30px;
+  height: 30px;
   text-align: center;
+}
+
+td.invisible,
+th.invisible
+{
+  border: 0px none;
+}
+
+td.project_name
+{
+  text-align: left;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 th.weekend

@@ -5,22 +5,22 @@
 <%= form_for :user, :url => users_path do |form| %>
 
   <div class="input-prepend">
-    <span class="add-on">A</span>
+    <span class="add-on"><i class="icon-user"></i></span>
     <%= form.text_field :name, :placeholder => 'Name', :class => 'span4' %>
   </div>
 
   <div class="input-prepend">
-    <span class="add-on">@</span>
+    <span class="add-on"><i class="icon-envelope"></i></span>
     <%= form.text_field :email, :placeholder => 'E-mail', :class => 'span4' %>
   </div>
 
   <div class="input-prepend">
-    <span class="add-on">*</span>
+    <span class="add-on"><i class="icon-lock"></i></span>
     <%= form.password_field :password, :placeholder => 'Password', :class => 'span4' %>
   </div>
 
   <div class="input-prepend">
-    <span class="add-on">**</span>
+    <span class="add-on"><i class="icon-lock"></i></span>
     <%= form.password_field :password_confirmation, :placeholder => 'Password confirmation', :class => 'span4' %>
   </div>
 
