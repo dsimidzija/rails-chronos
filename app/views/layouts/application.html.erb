@@ -24,7 +24,7 @@
               <li class="nav-header">User menu</li>
               <li><%= link_to 'Dashboard', user_tracking_dashboard_path(@current_user) %></li>
               <li><%= link_to 'Time entries', user_time_entries_path(@current_user) %></li>
-              <li><%= link_to 'Reports', user_monthly_report_path(@current_user) %></li>
+              <li><%= link_to 'Reports', user_reports_index_path(@current_user) %></li>
               <li><%= link_to 'Projects', user_projects_path(@current_user) %></li>
               <li class="divider"></li>
               <li><%= link_to 'Profile', user_path(@current_user) %></li>
@@ -34,6 +34,7 @@
               <li><%= link_to 'Home', root_path %></li>
               <li><%= link_to "Login", new_session_path %></li>
               <li><%= link_to "Register", new_user_path %></li>
+              asdhfasdf
             <% end %>
           </ul>
         </div>

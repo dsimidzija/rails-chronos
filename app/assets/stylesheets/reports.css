@@ -45,27 +45,27 @@ td.empty
 
 td.total_time
 {
-  color: #ffffff;
+  color: #000000;
   font-weight: bold;
 }
 
 td.time_insufficient
 {
-  background-color: #B94A48;
+  background-color: #FF6C67;
 }
 
 td.time_warning
 {
-  background-color: #F89406;
+  background-color: #FFDF97;
 }
 
 td.time_ok
 {
-  background-color: #3A87AD;
+  background-color: #A0DBF2;
 }
 
 td.time_success
 {
-  background-color: #468847;
+  background-color: #2BF386;
 }
 

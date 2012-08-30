@@ -49,4 +49,8 @@
     <div>Percent completed: <%= number_to_percentage(
       (@times_sum / (@workdays*8) * 100), :precision => 2) %></div>
   </div>
+<% else %>
+  <div class="alert alert-error">
+    No data for selected month
+  </div>
 <% end %>

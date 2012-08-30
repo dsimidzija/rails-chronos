@@ -13,7 +13,14 @@ Chronos::Application.routes.draw do
     match "tracking/start" => 'tracking#start', :method => :post, :as => :tracking_start
     match "tracking/:id/stop" => 'tracking#stop', :method => :post, :as => :tracking_stop
 
-    match "reports/current/month" => 'reports#current_month', :as => :monthly_report
+    match "reports" => 'reports#index', :as => :reports_index
+    match "reports/month/current" => 'reports#month',
+      :defaults => { :year => Date.today.year, :month => Date.today.month },
+      :as => :current_monthly_report
+    match "reports/month/:year/:month" => 'reports#month',
+      :constraints => { :year => /\d{4}/, :month => /\d{1,2}/ },
+      :defaults => { :year => Date.today.year, :month => Date.today.month },
+      :as => :monthly_report
   end
 
   root :to => 'sessions#new'
