@@ -31,19 +31,21 @@ td.project_name
   padding-right: 5px;
 }
 
-th.weekend
+th.weekend,
+th.holiday
 {
   color: #ff1234;
   background-color: #EEEEEE;
 }
 
 td.weekend,
+td.holiday,
 td.empty
 {
   background-color: #EEEEEE;
 }
 
-td.total_time
+tr.total_time td
 {
   color: #000000;
   font-weight: bold;

@@ -88,7 +88,7 @@ class TimeEntry < ActiveRecord::Base
 
     # workdays: monday to friday
     date.at_beginning_of_month.upto(date.at_end_of_month) do |day|
-      workdays += 1 unless [0, 6].include?(day.wday)
+      workdays += 1 unless [0, 6].include?(day.wday) or day.holiday?(:hr)
     end
 
     workdays

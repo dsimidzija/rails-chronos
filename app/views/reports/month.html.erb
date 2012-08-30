@@ -1,11 +1,11 @@
-<% content_for :title, 'Monthly overview' %>
+<% content_for :title, 'Monthly overview (%d/%d)' % [@start.month, @start.year] %>
 
 <% if @entries.any? %>
   <table class="monthly_report">
     <tr>
       <th class="invisible">&nbsp;</th>
       <% for date in @start..@end %>
-      <th class="<%= 'weekend' if [0,6].include?(date.wday) %>">
+      <th class="<%= css_class_for_non_workday(date) %>">
         <%= date.day %>
       </th>
       <% end %>
@@ -13,7 +13,7 @@
     <tr>
       <td class="invisible">&nbsp;</td>
       <% for date in @start..@end %>
-      <td class="<%= 'weekend' if [0,6].include?(date.wday) %>">
+      <td class="<%= css_class_for_non_workday(date) %>">
         <%= @times[date.day.to_s.to_sym] %>
       </td>
       <% end %>
@@ -25,17 +25,17 @@
         </td>
         <% for date in @start..@end %>
           <% percent = (time[date.day.to_s.to_sym]/8).round(2) %>
-          <td class="<%= 'weekend' if [0,6].include?(date.wday) %> <%= css_class_for_empty_cell(percent) %>">
+          <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_empty_cell(percent) %>">
             <%= percent unless percent == 0 %>
           </td>
         <% end %>
       </tr>
     <% end %>
-    <tr>
+    <tr class="total_time">
       <td class="invisible">&nbsp;</td>
       <% for date in @start..@end %>
         <% percent = (@times[date.day.to_s.to_sym]/8).round(2) %>
-        <td class="<%= 'weekend' if [0,6].include?(date.wday) %> <%= css_class_for_percent(percent, date) %>">
+        <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_percent(percent, date) unless date.future? %>">
           <%= percent %>
         </td>
       <% end %>
@@ -54,3 +54,19 @@
     No data for selected month
   </div>
 <% end %>
+
+<ul class="pager">
+  <%= link_to 'Previous month', user_monthly_report_path(
+          @current_user,
+          @start.months_ago(1).year,
+          @start.months_ago(1).month
+        )
+  %>
+
+  <%= link_to 'Next month', user_monthly_report_path(
+          @current_user,
+          @start.months_since(1).year,
+          @start.months_since(1).month
+        )
+  %>
+</ul>
