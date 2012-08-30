@@ -35,10 +35,8 @@
       <td class="invisible">&nbsp;</td>
       <% for date in @start..@end %>
         <% percent = (@times[date.day.to_s.to_sym]/8).round(2) %>
-        <td class="<%= 'weekend' if [0,6].include?(date.wday) %>">
-          <span class="<%= css_class_for_percent(percent, date) %>">
-            <%= percent %>
-          </span>
+        <td class="<%= 'weekend' if [0,6].include?(date.wday) %> <%= css_class_for_percent(percent, date) %>">
+          <%= percent %>
         </td>
       <% end %>
     </tr>
