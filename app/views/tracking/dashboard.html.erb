@@ -1,7 +1,7 @@
 <% content_for :title, 'Dashboard' %>
 
 <% for entry in @time_entries %>
-  <%= render :partial => 'time_entry', :locals => { :current_user => @current_user, :entry => entry } %>
+  <%= render :partial => 'time_entry', :locals => { :current_user => @current_user, :entry => entry, :first_entry => @first_entry } %>
 <% end %>
 
 <div>
