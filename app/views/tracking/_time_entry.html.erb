@@ -2,7 +2,7 @@
 entry_script = <<END
 $(document).ready(function() {
   var start_date = new Date(
-      #{entry.entry_date.year}, #{entry.entry_date.month}, #{entry.entry_date.day},
+      #{entry.entry_date.year}, #{entry.entry_date.month-1}, #{entry.entry_date.day},
       #{entry.start_time.hour}, #{entry.start_time.min}, 0
     );
 
