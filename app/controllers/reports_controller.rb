@@ -17,6 +17,8 @@ class ReportsController < ApplicationController
 
     @days_in_month = (@start..@end).to_a.size
     @workdays = TimeEntry.workdays(@start, @end)
+    @workdays_in_past = TimeEntry.workdays(@start, 1.day.ago.to_date)
+    @workdays_in_future = TimeEntry.workdays(Date.today, @end)
 
     @times = TimeEntry.times_by_day(@start, @end, @entries)
     @times_by_project = TimeEntry.times_by_day_and_project(@start, @end, @entries)

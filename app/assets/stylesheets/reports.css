@@ -71,3 +71,8 @@ td.time_success
   background-color: #2BF386;
 }
 
+div.month_additional_info
+{
+  margin-top: 25px;
+}
+
