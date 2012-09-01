@@ -5,12 +5,12 @@ class User < ActiveRecord::Base
   attr_accessor   :password
   attr_accessible :name, :email, :password, :password_confirmation
 
-  validates_presence_of     :name
+  validates_presence_of     :name, :email
   validates_length_of       :email, :within => 5..100
   validates_uniqueness_of   :email, :case_sensitive => false
   validates_email_format_of :email
   validates_length_of       :password, :within => 8..40, :if => :password_required?
-  validates_confirmation_of :password, :if => :password_required?
+  validates_confirmation_of :password, :if => :should_confirm_password?
 
   before_save :encrypt_password
 
@@ -41,5 +41,9 @@ class User < ActiveRecord::Base
 
   def password_required?
     encrypted_password.blank? || !password.blank?
+  end
+
+  def should_confirm_password?
+    encrypted_password.blank? || !password.blank? || !password_confirmation.blank?
   end
 end
