@@ -36,9 +36,9 @@ class TimeEntriesController < ApplicationController
   end
 
   def index
-    @time_entries = TimeEntry.find(:all,
-        :order => 'entry_date DESC, start_time DESC',
-        :conditions => { :user_id => @current_user })
+    @time_entries = TimeEntry.where(:user_id => @current_user)
+      .paginate(:page => params[:page])
+      .order('entry_date DESC, start_time DESC')
   end
 
   def destroy
