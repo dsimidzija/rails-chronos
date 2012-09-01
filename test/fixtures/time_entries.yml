@@ -4,8 +4,34 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+del_one:
+  id: 1
+  user: delboy
+  project: become_millionaire
+  entry_date: <%= '2012-08-01'.to_date.to_s(:db) %>
+  start_time: <%= Time.new.change(:hour => 8, :min => 30).to_s(:db) %>
+  end_time: <%= Time.new.change(:hour => 16, :min => 30).to_s(:db) %>
+
+del_two:
+  id: 2
+  user: delboy
+  project: become_millionaire
+  entry_date: <%= '2012-08-02'.to_date.to_s(:db) %>
+  start_time: <%= Time.new.change(:hour => 8, :min => 30).to_s(:db) %>
+  end_time: <%= Time.new.change(:hour => 16, :min => 30).to_s(:db) %>
+
+del_three_a:
+  id: 3
+  user: delboy
+  project: become_millionaire
+  entry_date: <%= '2012-08-03'.to_date.to_s(:db) %>
+  start_time: <%= Time.new.change(:hour => 8, :min => 30).to_s(:db) %>
+  end_time: <%= Time.new.change(:hour => 12, :min => 30).to_s(:db) %>
+
+del_three_b:
+  id: 4
+  user: delboy
+  project: visit_nags_head
+  entry_date: <%= '2012-08-03'.to_date.to_s(:db) %>
+  start_time: <%= Time.new.change(:hour => 12, :min => 30).to_s(:db) %>
+  end_time: <%= Time.new.change(:hour => 17, :min => 45).to_s(:db) %>
