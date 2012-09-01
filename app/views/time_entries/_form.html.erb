@@ -29,6 +29,7 @@ script = <<END
 
 $(document).ready(function() {
   $('#time_entry_entry_date_formatted').datepicker({
+    firstDay: 1,
     dateFormat: '#{date_input_format_js}',
   });
 
