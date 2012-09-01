@@ -83,16 +83,53 @@ class TimeEntry < ActiveRecord::Base
     (time_in_hours / (TimeEntry.workdays(entry_date) * 8)) * 100
   end
 
-  def self.workdays(date)
-    workdays = 0
+  class << self
 
-    # workdays: monday to friday
-    date.at_beginning_of_month.upto(date.at_end_of_month) do |day|
-      workdays += 1 unless [0, 6].include?(day.wday) or day.holiday?(:hr)
+    def workdays(start_date, end_date)
+      workdays = 0
+
+      # workdays: monday to friday minus holidays
+      (start_date..end_date).each do |day|
+        workdays += 1 unless [0, 6].include?(day.wday) or day.holiday?(:hr)
+      end
+
+      workdays
     end
 
-    workdays
-  end
+    def times_by_day(start_date, end_date, entries)
+      times = {}
+
+      for day in start_date..end_date
+        day_entries = entries.select {|e| e.entry_date == day}
+        times[day.day.to_s.to_sym] = day_entries.map(&:time_in_hours).inject(0, :+).round(2)
+      end
+
+      times
+    end
+
+    def times_by_day_and_project(start_date, end_date, entries)
+      times = {}
+
+      for day in start_date..end_date
+        day_entries = entries.select {|e| e.entry_date == day}
+
+        day_entries.each do |d|
+          times[d.project.name] = {} unless times[d.project.name].is_a?(Hash)
+          times[d.project.name][day.day.to_s.to_sym] = 0 if times[d.project.name][day.day.to_s.to_sym].nil?
+          times[d.project.name][day.day.to_s.to_sym] += d.time_in_hours
+        end
+      end
+
+      (start_date..end_date).each do |date|
+        times.each do |project, day|
+          times[project][date.day.to_s.to_sym] = 0 unless times[project][date.day.to_s.to_sym].is_a?(Numeric)
+        end
+      end
+
+      times
+    end
+
+  end # class << self
 
   protected
 
