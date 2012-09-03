@@ -20,6 +20,10 @@ class ReportsController < ApplicationController
     @workdays_in_past = TimeEntry.workdays(@start, 1.day.ago.to_date)
     @workdays_in_future = TimeEntry.workdays(Date.today, @end)
 
+    @time_today = TimeEntry.where(
+        :user_id => @current_user.id,
+        :entry_date => Date.today.to_date)
+      .map(&:time_in_hours).inject(0, :+)
     @times = TimeEntry.times_by_day(@start, @end, @entries)
     @times_by_project = TimeEntry.times_by_day_and_project(@start, @end, @entries)
     @times_sum = @times.values.inject(0, :+)

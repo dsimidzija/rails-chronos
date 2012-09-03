@@ -14,7 +14,7 @@
       <td class="invisible">&nbsp;</td>
       <% for date in @start..@end %>
       <td class="<%= css_class_for_non_workday(date) %>">
-        <%= @times[date.day.to_s.to_sym] %>
+        <%= number_for_report(@times[date.day.to_s.to_sym]) %>
       </td>
       <% end %>
     </tr>
@@ -26,7 +26,7 @@
         <% for date in @start..@end %>
           <% percent = (time[date.day.to_s.to_sym]/8).round(2) %>
           <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_empty_cell(percent) %>">
-            <%= percent unless percent == 0 %>
+            <%= number_for_report(percent) unless percent == 0 %>
           </td>
         <% end %>
       </tr>
@@ -36,7 +36,7 @@
       <% for date in @start..@end %>
         <% percent = (@times[date.day.to_s.to_sym]/8).round(2) %>
         <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_percent(percent, date) unless date.future? or date.holiday?(:hr) %>">
-          <%= percent %>
+          <%= number_for_report(percent) %>
         </td>
       <% end %>
     </tr>
@@ -46,7 +46,10 @@
     <div>Hours required: <%= @workdays*8 %></div>
     <div>Total hours: <%= @times_sum.round 2 %></div>
     <div>Status (month): <%= (@times_sum - (@workdays*8)).round 2 %></div>
-    <div>Status (current): <%= (@times_sum - (@workdays_in_past*8)).round 2 %></div>
+    <% if (@start..@end).cover?(Date.today) %>
+      <div>Status (until today): <%= ((@times_sum - @time_today) - (@workdays_in_past*8)).round 2 %></div>
+      <div>Status (today): <%= (@time_today - 8).round 2 %></div>
+    <% end %>
     <div>Percent completed: <%= number_to_percentage(
       (@times_sum / (@workdays*8) * 100), :precision => 2) %></div>
   </div>

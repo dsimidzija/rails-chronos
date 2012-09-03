@@ -26,4 +26,8 @@ module ReportsHelper
 
     false
   end
+
+  def number_for_report(number)
+    number_to_human number, :separator => ',', :precision => 2, :significant => false
+  end
 end
