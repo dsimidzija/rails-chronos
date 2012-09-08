@@ -9,13 +9,8 @@ class Preference < ActiveRecord::Base
     countries = {}
 
     Holidays.available.each do |country|
-      c = Country.find_by_alpha2(country.to_s)
-
-      if c
-        countries[c[1]['name']] = country
-      else
-        countries[country.to_s.humanize] = country
-      end
+      c = Country.find_by_alpha2(country)
+      countries[c[1]['name']] = country if c
     end
 
     countries.sort

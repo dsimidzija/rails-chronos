@@ -35,7 +35,7 @@
       <td class="invisible">&nbsp;</td>
       <% for date in @start..@end %>
         <% percent = (@time_periods[date.day.to_s.to_sym]/8).round(2) %>
-        <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_percent(percent, date) unless date.future? or date.holiday?(:hr) %>">
+        <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_percent(percent, date) unless date.future? or user_holiday?(date) %>">
           <%= number_for_report(percent) %>
         </td>
       <% end %>

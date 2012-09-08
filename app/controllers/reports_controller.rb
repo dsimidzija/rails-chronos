@@ -16,9 +16,9 @@ class ReportsController < ApplicationController
       .order(:entry_date => :asc, :start_time => :asc)
 
     @days_in_month = (@start..@end).to_a.size
-    @workdays = TimeEntry.workdays(@start, @end)
-    @workdays_in_past = TimeEntry.workdays(@start, 1.day.ago.to_date)
-    @workdays_in_future = TimeEntry.workdays(Date.today, @end)
+    @workdays = @current_user.workdays(@start, @end)
+    @workdays_in_past = @current_user.workdays(@start, 1.day.ago.to_date)
+    @workdays_in_future = @current_user.workdays(Date.today, @end)
 
     @time_today = TimeEntry.where(
         :user_id => @current_user.id,

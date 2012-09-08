@@ -24,6 +24,15 @@
     <%= form.password_field :password_confirmation, :placeholder => 'Password confirmation', :class => 'span4' %>
   </div>
 
+  <div class="input-prepend">
+    <span class="add-on"><i class="icon-flag"></i></span>
+    <%= form.select :country,
+          Preference.countries_with_holidays,
+          { :include_blank => '(Select holidays country)' },
+          { :class => 'span4' }
+    %>
+  </div>
+
   <%= submit_tag "Submit", :class => 'btn' %>
 
 <% end %>

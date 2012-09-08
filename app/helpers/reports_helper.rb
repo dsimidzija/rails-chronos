@@ -14,8 +14,12 @@ module ReportsHelper
  
   def css_class_for_non_workday(date)
     classes = []
+    country = @current_user.country.to_sym
     classes << 'weekend' if weekend?(date)
-    classes << 'holiday' if date.holiday?(:hr)
+
+    if Holidays.available.include?(country)
+      classes << 'holiday' if date.holiday?(country)
+    end
 
     classes.join(' ')
   end
@@ -29,5 +33,15 @@ module ReportsHelper
 
   def number_for_report(number)
     number_to_human number, :separator => ',', :precision => 2, :significant => false
+  end
+
+  def user_holiday?(day)
+    country = @current_user.country
+
+    if Holidays.available.include?(country)
+      return date.holiday?(country)
+    end
+
+    false
   end
 end

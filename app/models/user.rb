@@ -32,10 +32,27 @@ class User < ActiveRecord::Base
     encrypted_password == User.encrypt(password, salt)
   end
 
+  def workdays(start_date, end_date)
+    workdays = 0
+
+    # workdays: monday to friday minus holidays
+    if Holidays.available.include?(country)
+      (start_date..end_date).each do |day|
+        workdays += 1 unless [0, 6].include?(day.wday) or day.holiday?(country)
+      end
+    else
+      (start_date..end_date).each do |day|
+        workdays += 1 unless [0, 6].include?(day.wday)
+      end
+    end
+
+    workdays
+  end
+
   def country_name
     c = Country.find_by_alpha2(country)
     return c[1]['name'] if c
-    ''
+    country.humanize
   end
 
   protected
@@ -59,7 +76,8 @@ class User < ActiveRecord::Base
   end
 
   def ensure_country_exists
-    c = Country.find_by_alpha2(country)
-    errors.add(:country, 'cannot be empty') unless c
+    #c = Country.find_by_alpha2(country)
+    return if Holidays.available.include?(country.to_sym)
+    errors.add(:country, 'cannot be empty')
   end
 end
