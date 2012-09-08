@@ -11,14 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825121844) do
+ActiveRecord::Schema.define(:version => 20120908151851) do
+
+  create_table "preferences", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "preferences", ["user_id", "name"], :name => "index_preferences_on_user_id_and_name", :unique => true
 
   create_table "projects", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "time_entries", :force => true do |t|
@@ -27,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20120825121844) do
     t.time     "start_time"
     t.time     "end_time"
     t.text     "note"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.date     "entry_date"
   end
 

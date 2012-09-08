@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include HasPreferences
   has_many :projects
   has_many :time_entries
 
@@ -11,6 +12,10 @@ class User < ActiveRecord::Base
   validates_email_format_of :email
   validates_length_of       :password, :within => 8..40, :if => :password_required?
   validates_confirmation_of :password, :if => :should_confirm_password?
+
+  has_preference            :country,
+                            :accessible => true,
+                            :validate_with => :ensure_country_exists
 
   before_save :encrypt_password
 
@@ -25,6 +30,12 @@ class User < ActiveRecord::Base
 
   def authenticated?(password)
     encrypted_password == User.encrypt(password, salt)
+  end
+
+  def country_name
+    c = Country.find_by_alpha2(country)
+    return c[1]['name'] if c
+    ''
   end
 
   protected
@@ -45,5 +56,10 @@ class User < ActiveRecord::Base
 
   def should_confirm_password?
     encrypted_password.blank? || !password.blank? || !password_confirmation.blank?
+  end
+
+  def ensure_country_exists
+    c = Country.find_by_alpha2(country)
+    errors.add(:country, 'cannot be empty') unless c
   end
 end

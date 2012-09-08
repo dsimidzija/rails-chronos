@@ -6,6 +6,7 @@ gem 'sqlite3', '1.3.6'
 gem 'jquery-ui-rails'
 
 gem 'validates_email_format_of', '~> 1.5.3'
+gem 'countries', '~> 0.8.2'
 gem 'holidays', :git => 'git://github.com/lecterror/holidays.git' # todo: switch to official repo
 gem 'bootstrap-will_paginate', '~> 0.0.8'
 
