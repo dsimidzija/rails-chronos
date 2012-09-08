@@ -24,9 +24,12 @@ class ReportsController < ApplicationController
         :user_id => @current_user.id,
         :entry_date => Date.today.to_date)
       .map(&:time_in_hours).inject(0, :+)
-    @times = TimeEntry.times_by_day(@start, @end, @entries)
-    @times_by_project = TimeEntry.times_by_day_and_project(@start, @end, @entries)
-    @times_sum = @times.values.inject(0, :+)
+    @time_periods = TimeEntry.time_periods_by_day(@start, @end, @entries)
+    @time_periods_in_past = TimeEntry.time_periods_by_day(@start, 1.day.ago.to_date, @entries)
+    @time_periods_by_project = TimeEntry.time_periods_by_day_and_project(@start, @end, @entries)
+
+    @time_periods_sum = @time_periods.values.inject(0, :+)
+    @time_periods_in_past_sum = @time_periods_in_past.values.inject(0, :+)
   end
 
 end

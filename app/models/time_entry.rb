@@ -96,7 +96,7 @@ class TimeEntry < ActiveRecord::Base
       workdays
     end
 
-    def times_by_day(start_date, end_date, entries)
+    def time_periods_by_day(start_date, end_date, entries)
       times = {}
 
       for day in start_date..end_date
@@ -107,7 +107,7 @@ class TimeEntry < ActiveRecord::Base
       times
     end
 
-    def times_by_day_and_project(start_date, end_date, entries)
+    def time_periods_by_day_and_project(start_date, end_date, entries)
       times = {}
 
       for day in start_date..end_date
