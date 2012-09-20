@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(:version => 20120908151851) do
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "time_entries", :force => true do |t|
@@ -37,8 +37,8 @@ ActiveRecord::Schema.define(:version => 20120908151851) do
     t.time     "start_time"
     t.time     "end_time"
     t.text     "note"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.date     "entry_date"
   end
 

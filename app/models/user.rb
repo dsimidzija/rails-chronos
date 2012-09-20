@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     workdays = 0
 
     # workdays: monday to friday minus holidays
-    if Holidays.available.include?(country)
+    if Holidays.available.include?(country.to_sym)
       (start_date..end_date).each do |day|
         workdays += 1 unless [0, 6].include?(day.wday) or day.holiday?(country)
       end
