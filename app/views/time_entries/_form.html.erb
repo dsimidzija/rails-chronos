@@ -1,7 +1,7 @@
 <div class="input-prepend">
   <%= collection_select :time_entry,
         :project_id,
-        @current_user.projects,
+        @current_user.projects.order(:name),
         :id,
         :name,
         :prompt => '(Select a project)' %>
