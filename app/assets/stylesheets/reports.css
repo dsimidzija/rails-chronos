@@ -1,19 +1,14 @@
 
-.monthly_report td
-{
-  min-width: 32px;
-}
-
 .monthly_report td,
 .monthly_report th
 {
-  border: 1px solid #000000;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #999999;
 }
 
 .monthly_report td
 {
-  width: 30px;
-  height: 30px;
   text-align: center;
 }
 
