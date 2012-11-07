@@ -1,5 +1,5 @@
 <% content_for :title, 'Reports' %>
 
 <ul class="nav nav-pills nav-stacked well well-small" style="max-width: 400px;">
-  <li><%= link_to 'Monthly overview', user_current_monthly_report_path(@current_user) %></li>
+  <li><%= link_to 'Monthly overview', user_monthly_report_path(@current_user, Date.today.year, Date.today.month) %></li>
 </ul>

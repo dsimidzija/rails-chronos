@@ -6,7 +6,11 @@ class ReportsController < ApplicationController
   end
 
   def month
-    reference_date = DateTime.strptime("#{params[:year]}-#{params[:month]}", "%Y-%m").to_date
+    if params[:year] and params[:month]
+      reference_date = DateTime.strptime("#{params[:year]}-#{params[:month]}", "%Y-%m").to_date
+    else
+      reference_date = DateTime.now
+    end
     @start = reference_date.at_beginning_of_month
     @end = reference_date.at_end_of_month
 
