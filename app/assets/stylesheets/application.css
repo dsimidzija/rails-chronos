@@ -11,6 +11,7 @@
  *= require_self
  *= require jquery.ui.all
  *= require ./bootstrap/css/bootstrap
+ *= require ./bootstrap/css/bootstrap-responsive
  *= require ./jquery-ui-timepicker-addon
  *= require ./default
  *= require ./time_entries
