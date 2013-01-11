@@ -23,4 +23,4 @@ en:
 
   time_js:
     formats:
-      input: ! 'hh:mm'
+      input: ! 'HH:mm'

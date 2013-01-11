@@ -4,7 +4,9 @@
         @current_user.projects.order(:name),
         :id,
         :name,
-        :prompt => '(Select a project)' %>
+        { :prompt => '(Select a project)' },
+        { :class => 'span3' }
+  %>
 </div>
 
 <div class="input-prepend">

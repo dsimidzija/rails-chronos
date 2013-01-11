@@ -4,11 +4,17 @@
 
   <div class="input-prepend">
     <%= collection_select :tracking,
-        :project_id,
-        @current_user.projects.order(:name),
-        :id,
-        :name,
-        :prompt => '(Select a project)' %>
+          :project_id,
+          @current_user.projects.order(:name),
+          :id,
+          :name,
+          { :prompt => '(Select a project)' },
+          { :class => 'span3' }
+      %>
+  </div>
+
+  <div class="input-prepend">
+    <%= form.text_field :start_time_formatted, :placeholder => 'Start time', :class => 'span3'  %>
   </div>
 
   <div class="input-prepend">
@@ -20,3 +26,32 @@
   <%= submit_tag 'Start tracking', :class => 'btn' %>
 
 <% end %>
+
+<%
+script = <<END
+
+$(document).ready(function() {
+
+  $('#tracking_start_time_formatted').timepicker({
+    timeFormat: '#{time_input_format_js}',
+  });
+
+  var timer_update_start = $.timer(function() {
+    var _time = new Date();
+    var _input = $('#tracking_start_time_formatted');
+
+    _input.hour = _time.getHours();
+    _input.minute = _time.getMinutes();
+
+    _input.val(
+        $.datepicker.formatTime(
+          '#{time_input_format_js}',
+          _input
+        )
+    );
+  }).set({ time: 1000, autostart: true });
+});
+
+END
+%>
+<%= javascript_tag script %>
