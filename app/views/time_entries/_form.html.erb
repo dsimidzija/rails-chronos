@@ -35,7 +35,13 @@ $(document).ready(function() {
     dateFormat: '#{date_input_format_js}',
   });
 
-  $('#time_entry_start_time_formatted, #time_entry_end_time_formatted').timepicker({
+  $('#time_entry_start_time_formatted').timepicker({
+    timeOnlyTitle: 'Start time',
+    timeFormat: '#{time_input_format_js}',
+  });
+
+  $('#time_entry_end_time_formatted').timepicker({
+    timeOnlyTitle: 'End time',
     timeFormat: '#{time_input_format_js}',
   });
 });

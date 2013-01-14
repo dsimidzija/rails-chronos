@@ -34,6 +34,10 @@ $(document).ready(function() {
 
   $('#tracking_start_time_formatted').timepicker({
     timeFormat: '#{time_input_format_js}',
+    timeOnlyTitle: 'Start time',
+    onSelect: function() {
+        timer_update_start.stop();
+    },
   });
 
   var timer_update_start = $.timer(function() {
