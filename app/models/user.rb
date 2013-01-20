@@ -77,7 +77,6 @@ class User < ActiveRecord::Base
 
   def ensure_country_exists
     #c = Country.find_by_alpha2(country)
-    return if Holidays.available.include?(country.to_sym)
-    errors.add(:country, 'cannot be empty')
+    errors.add(:country, 'cannot be empty') unless country and Holidays.available.include?(country.to_sym)
   end
 end

@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  fixtures :users
+  fixtures :users, :preferences
 
   test "validation of blank user" do
     user = User.new
@@ -15,6 +15,7 @@ class UserTest < ActiveSupport::TestCase
         "does not appear to be valid"
       ],
       :password => ["is too short (minimum is 8 characters)"],
+      :country => ["cannot be empty"],
     }
 
     assert user.errors.messages.any?
@@ -34,6 +35,7 @@ class UserTest < ActiveSupport::TestCase
     user.name = 'Sarah'
     user.email = 'jessica@parker.com'
     user.password = 'horsey'
+    user.country = 'hr'
 
     assert !user.valid?
 

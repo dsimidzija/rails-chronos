@@ -15,10 +15,18 @@
     <% end %>
   </tr>
   <tr>
-    <td class="invisible">&nbsp;</td>
+    <td>Hours</td>
     <% for date in @start..@end %>
     <td class="<%= css_class_for_non_workday(date) %>">
       <%= number_for_report(@time_periods[date.day.to_s.to_sym]) %>
+    </td>
+    <% end %>
+  </tr>
+  <tr>
+    <td style="border-bottom: 2px solid;">Lunch break?</td>
+    <% for date in @start..@end %>
+    <td class="<%= css_class_for_non_workday(date) %>" style="border-bottom: 2px solid;">
+      <span class="<%= 'icon-ok' if @lunch_breaks[date.day.to_s.to_sym] %>">&nbsp;</span>
     </td>
     <% end %>
   </tr>
@@ -28,7 +36,11 @@
         <%= project_name %>
       </td>
       <% for date in @start..@end %>
-        <% percent = (time[date.day.to_s.to_sym]/8).round(2) %>
+        <%
+        work_time = 8
+        work_time = 7.5 if @lunch_breaks[date.day.to_s.to_sym]
+        percent = (time[date.day.to_s.to_sym]/work_time).round(2)
+        %>
         <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_empty_cell(percent) %>">
           <%= number_for_report(percent) unless percent == 0 %>
         </td>
@@ -38,7 +50,11 @@
   <tr class="total_time">
     <td class="invisible">&nbsp;</td>
     <% for date in @start..@end %>
-      <% percent = (@time_periods[date.day.to_s.to_sym]/8).round(2) %>
+      <%
+      work_time = 8
+      work_time = 7.5 if @lunch_breaks[date.day.to_s.to_sym]
+      percent = (@time_periods[date.day.to_s.to_sym]/work_time).round(2)
+      %>
       <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_percent(percent, date) unless date.future? or user_holiday?(date) %>">
         <%= number_for_report(percent) %>
       </td>
@@ -47,9 +63,10 @@
 </table>
 <div class="month_additional_info">
   <div>Work days: <%= @workdays %></div>
-  <div>Hours required: <%= @workdays*8 %></div>
+  <div>Hours required (total): <%= @hours_required.round 2 %></div>
+  <div>Hours required (with breaks): <%= @hours_required_with_breaks.round 2 %></div>
   <div>Total hours: <%= @time_periods_sum.round 2 %></div>
-  <div>Status (month): <%= (@time_periods_sum - (@workdays*8)).round 2 %></div>
+  <div>Status (month): <%= (@time_periods_sum - (@hours_required)).round 2 %></div>
   <% if (@start..@end).cover?(Date.today) %>
     <div>Status (until today): <%= (@time_periods_in_past_sum - (@workdays_in_past*8)).round 2 %></div>
     <div>Status (today): <%= (@time_today - 8).round 2 %></div>

@@ -118,6 +118,23 @@ class TimeEntry < ActiveRecord::Base
       times
     end
 
+    def detect_lunch_breaks_by_day(start_date, end_date, entries, minimum_time)
+      output = {}
+
+      for day in start_date..end_date
+        day_entries = entries.select {|e| e.entry_date == day}
+        output[day.day.to_s.to_sym] = false
+        next if day_entries.length < 2
+
+        for index in 0..(day_entries.length-2)
+          difference = (day_entries[index+1].start_time - day_entries[index].end_time).to_f / 60
+          output[day.day.to_s.to_sym] = true if difference.minutes >= minimum_time.minutes
+        end
+      end
+
+      output
+    end
+
   end # class << self
 
   protected

@@ -35,3 +35,35 @@ del_three_b:
   entry_date: <%= '2012-08-03'.to_date.to_s(:db) %>
   start_time: <%= Time.new.change(:hour => 12, :min => 30).to_s(:db) %>
   end_time: <%= Time.new.change(:hour => 17, :min => 45).to_s(:db) %>
+
+lunch_detect_one:
+  id: 5
+  user: delboy
+  project: visit_nags_head
+  entry_date: <%= '2013-01-10'.to_date.to_s(:db) %>
+  start_time: <%= Time.new.change(:hour => 8, :min => 0).to_s(:db) %>
+  end_time: <%= Time.new.change(:hour => 12, :min => 0).to_s(:db) %>
+
+lunch_detect_two:
+  id: 6
+  user: delboy
+  project: visit_nags_head
+  entry_date: <%= '2013-01-10'.to_date.to_s(:db) %>
+  start_time: <%= Time.new.change(:hour => 12, :min => 15).to_s(:db) %>
+  end_time: <%= Time.new.change(:hour => 16, :min => 15).to_s(:db) %>
+
+lunch_detect_three:
+  id: 7
+  user: delboy
+  project: visit_nags_head
+  entry_date: <%= '2013-01-11'.to_date.to_s(:db) %>
+  start_time: <%= Time.new.change(:hour => 8, :min => 0).to_s(:db) %>
+  end_time: <%= Time.new.change(:hour => 12, :min => 0).to_s(:db) %>
+
+lunch_detect_four:
+  id: 8
+  user: delboy
+  project: visit_nags_head
+  entry_date: <%= '2013-01-11'.to_date.to_s(:db) %>
+  start_time: <%= Time.new.change(:hour => 12, :min => 30).to_s(:db) %>
+  end_time: <%= Time.new.change(:hour => 16, :min => 30).to_s(:db) %>

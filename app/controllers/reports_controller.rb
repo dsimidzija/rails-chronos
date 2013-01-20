@@ -14,6 +14,12 @@ class ReportsController < ApplicationController
     @start = reference_date.at_beginning_of_month
     @end = reference_date.at_end_of_month
 
+    prepare_month_report
+  end
+
+  protected
+
+  def prepare_month_report
     @entries = TimeEntry.where(
         :user_id => @current_user.id,
         :entry_date => @start..@end)
@@ -34,6 +40,11 @@ class ReportsController < ApplicationController
 
     @time_periods_sum = @time_periods.values.inject(0, :+)
     @time_periods_in_past_sum = @time_periods_in_past.values.inject(0, :+)
+
+    @lunch_breaks = TimeEntry.detect_lunch_breaks_by_day(@start, @end, @entries, 30)
+    @hours_per_day = 8
+    @hours_required = (@workdays * @hours_per_day)
+    @hours_required_with_breaks = @hours_required - @lunch_breaks.inject(0) {|res, item| item[1] ? (res+0.5) : res}
   end
 
 end
