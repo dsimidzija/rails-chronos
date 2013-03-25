@@ -19,3 +19,4 @@
 //= require time
 //= require time_entries
 //= require tracking
+//= require bootstrap
