@@ -30,40 +30,44 @@ th.weekend,
 th.holiday
 {
   color: #ff1234;
-  background-color: #EEEEEE;
+  background-color: #F9F9F9;
 }
 
 td.weekend,
 td.holiday,
 td.empty
 {
-  background-color: #EEEEEE;
+  background-color: #F9F9F9;
 }
 
 tr.total_time td
 {
-  color: #000000;
+  /*color: #000000;*/
   font-weight: bold;
 }
 
 td.time_insufficient
 {
-  background-color: #FF6C67;
+  color: #B94A48;
+  background-color: #F2DEDE;
 }
 
 td.time_warning
 {
-  background-color: #FFDF97;
+  color: #C09853;
+  background-color: #FCF8E3;
 }
 
 td.time_ok
 {
-  background-color: #A0DBF2;
+  color: #3A87AD;
+  background-color: #D9EDF7;
 }
 
 td.time_success
 {
-  background-color: #2BF386;
+  color: #468847;
+  background-color: #DFF0D8;
 }
 
 div.month_additional_info
