@@ -17,6 +17,23 @@ class ReportsController < ApplicationController
     prepare_month_report
   end
 
+  def month_breakdown_by_project
+    if params[:year] and params[:month]
+      reference_date = DateTime.strptime("#{params[:year]}-#{params[:month]}", "%Y-%m").to_date
+    else
+      reference_date = DateTime.now
+    end
+    @start = reference_date.at_beginning_of_month
+    @end = reference_date.at_end_of_month
+
+    @entries = TimeEntry.where(
+        :user_id => @current_user.id,
+        :entry_date => @start..@end)
+      .order(:entry_date => :asc, :start_time => :asc)
+
+    @entries = TimeEntry.time_periods_by_project_totals(@start, @end, @entries)
+  end
+
   protected
 
   def prepare_month_report

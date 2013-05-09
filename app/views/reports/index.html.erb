@@ -2,4 +2,5 @@
 
 <ul class="nav nav-pills nav-stacked well well-small" style="max-width: 400px;">
   <li><%= link_to 'Monthly overview', user_monthly_report_path(@current_user, Date.today.year, Date.today.month) %></li>
+  <li><%= link_to 'Monthly breakdown by project', user_monthly_breakdown_by_project_report_path(@current_user, Date.today.year, Date.today.month) %></li>
 </ul>

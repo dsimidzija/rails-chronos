@@ -118,6 +118,32 @@ class TimeEntry < ActiveRecord::Base
       times
     end
 
+    def time_periods_by_project_totals(start_date, end_date, entries)
+      times = {}
+      percentages = {}
+
+      projects = entries.map { |t| t.project.name }.uniq
+
+      projects.each do |p|
+        times[p] = 0
+        percentages[p] = 0
+      end
+
+      entries.each do |e|
+        times[e.project.name] += e.time_in_hours
+      end
+
+      total_hours = times.values.inject(0, :+)
+
+      return {} if total_hours == 0
+
+      times.each do |k, v|
+        percentages[k] = v / total_hours * 100;
+      end
+
+      percentages
+    end
+
     def detect_lunch_breaks_by_day(start_date, end_date, entries, minimum_time)
       output = {}
 

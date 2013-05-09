@@ -19,6 +19,9 @@ Chronos::Application.routes.draw do
     match "reports/monthly/year/:year/month/:month" => 'reports#month',
       :constraints => { :year => /\d{4}/, :month => /\d{1,2}/ },
       :as => :monthly_report
+    match "reports/monthly/project_breakdown/year/:year/month/:month" => 'reports#month_breakdown_by_project',
+      :constraints => { :year => /\d{4}/, :month => /\d{1,2}/ },
+      :as => :monthly_breakdown_by_project_report
   end
 
   root :to => 'sessions#new'
