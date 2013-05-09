@@ -10,6 +10,8 @@ gem 'countries', '~> 0.8.2'
 gem 'holidays', :git => 'git://github.com/lecterror/holidays.git' # todo: switch to official repo
 gem 'bootstrap-will_paginate', '~> 0.0.8'
 
+gem "highcharts-rails", "~> 3.0.1.5"
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

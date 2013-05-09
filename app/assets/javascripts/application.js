@@ -20,3 +20,5 @@
 //= require time_entries
 //= require tracking
 //= require bootstrap
+//= require highcharts
+//= require highcharts/highcharts-more
