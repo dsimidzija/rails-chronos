@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/lecterror/holidays.git
-  revision: 8a9d48f2b1d462f42c98842c2cc9c1fdc8149c8c
+  remote: git@github.com:alexdunae/holidays.git
+  revision: 9e04d8e249f6b1bf3d8a4dfbe1e9323e3ec795dc
   specs:
     holidays (1.0.5)
 
