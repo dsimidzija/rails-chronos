@@ -13,7 +13,7 @@ better given enough spare time. :)
 If you'd like to contribute in some way, feel free to do so, either by creating
 an issue (ideas welcome!) or forking (i.e. cleaning up my code).
 
-## Licence ##
+## License ##
 
 The MIT License (MIT)
 
