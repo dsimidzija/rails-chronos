@@ -59,8 +59,7 @@ class ReportsController < ApplicationController
     @time_periods_in_past_sum = @time_periods_in_past.values.inject(0, :+)
 
     @lunch_breaks = TimeEntry.detect_lunch_breaks_by_day(@start, @end, @entries, 30)
-    @hours_per_day = 8
-    @hours_required = (@workdays * @hours_per_day)
+    @hours_required = (@workdays * @current_user.work_hours.to_i)
     @hours_required_with_breaks = @hours_required - @lunch_breaks.inject(0) {|res, item| item[1] ? (res+0.5) : res}
   end
 

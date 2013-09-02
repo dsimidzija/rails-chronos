@@ -21,7 +21,7 @@ END
     <div class="project">Project: <%= link_to entry.project.name, user_project_path(@current_user, entry.project) %></div>
     <div class="entry_date">Date: <%= entry.entry_date %></div>
     <div class="start_time">Tracking since: <%= entry.start_time %></div>
-    <div class="target_time">Target: <%= first_entry.start_time + 8.hours %></div>
+    <div class="target_time">Target: <%= first_entry.start_time + @current_user.work_hours.to_i.hours %></div>
     <%= render :partial => 'stop_form', :locals => { :current_user => current_user, :tracking => entry } %>
   </div>
 

@@ -37,8 +37,8 @@
       </td>
       <% for date in @start..@end %>
         <%
-        work_time = 8
-        work_time = 7.5 if @lunch_breaks[date.day.to_s.to_sym]
+        work_time = @current_user.work_hours.to_i
+        work_time -= 0.5 if @lunch_breaks[date.day.to_s.to_sym]
         percent = (time[date.day.to_s.to_sym]/work_time).round(2)
         %>
         <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_empty_cell(percent) %>">
@@ -51,8 +51,8 @@
     <td class="invisible">&nbsp;</td>
     <% for date in @start..@end %>
       <%
-      work_time = 8
-      work_time = 7.5 if @lunch_breaks[date.day.to_s.to_sym]
+      work_time = @current_user.work_hours.to_i
+      work_time -= 0.5 if @lunch_breaks[date.day.to_s.to_sym]
       percent = (@time_periods[date.day.to_s.to_sym]/work_time).round(2)
       %>
       <td class="<%= css_class_for_non_workday(date) %> <%= css_class_for_percent(percent, date) unless date.future? or user_holiday?(date) %>">
@@ -68,11 +68,11 @@
   <div>Total hours: <%= @time_periods_sum.round 2 %></div>
   <div>Status (month): <%= (@time_periods_sum - (@hours_required)).round 2 %></div>
   <% if (@start..@end).cover?(Date.today) %>
-    <div>Status (until today): <%= (@time_periods_in_past_sum - (@workdays_in_past*8)).round 2 %></div>
-    <div>Status (today): <%= (@time_today - 8).round 2 %></div>
+    <div>Status (until today): <%= (@time_periods_in_past_sum - (@workdays_in_past*@current_user.work_hours.to_i)).round 2 %></div>
+    <div>Status (today): <%= (@time_today - @current_user.work_hours.to_i).round 2 %></div>
   <% end %>
   <div>Percent completed: <%= number_to_percentage(
-    (@time_periods_sum / (@workdays*8) * 100), :precision => 2) %></div>
+    (@time_periods_sum / (@workdays*@current_user.work_hours.to_i) * 100), :precision => 2) %></div>
 </div>
 
 <ul class="pager">

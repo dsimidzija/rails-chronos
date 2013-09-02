@@ -14,10 +14,18 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password, :if => :should_confirm_password?
 
   has_preference            :country,
+														:default => 'hr',
                             :accessible => true,
                             :validate_with => :ensure_country_exists
 
+	has_preference						:work_hours,
+														:default => 8,
+														:accessible => true,
+														:validate_with => :is_valid_work_hour
+
   before_save :encrypt_password
+
+	after_create :initialize_preferences
 
   def self.encrypt(password, salt)
     Digest::SHA1.hexdigest("--#{salt}-#{password}--")
@@ -77,6 +85,18 @@ class User < ActiveRecord::Base
 
   def ensure_country_exists
     #c = Country.find_by_alpha2(country)
+		return if self.new_record?
     errors.add(:country, 'cannot be empty') unless country and Holidays.available.include?(country.to_sym)
   end
+
+	def is_valid_work_hour
+		return if self.new_record?
+		errors.add(:work_hours, 'must be a valid integer') unless /^\d+/.match(self.work_hours)
+		errors.add(:work_hours, 'must be between 1 and 24') unless (1..24).include?(self.work_hours.to_i)
+	end
+
+	def initialize_preferences
+		self.country = 'hr'
+		self.work_hours = 8
+	end
 end
